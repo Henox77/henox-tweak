@@ -1,0 +1,32 @@
+<!--meta {"title":"Bilinen Sorunlar","slug":"/bilinen-sorunlar/","group":"Yardım","order":2,"desc":"Henox Tweak kullanırken karşılaşılabilecek sorunlar ve çözümleri.","intro":"Karşılaşabileceğin sorunlar ve çözümleri."} -->
+<h2>"irm" komutu çalışmıyor / tanınmıyor</h2>
+<p>Komutu <strong>Komut İstemi'ne (cmd)</strong> değil, <strong>PowerShell</strong> veya <strong>Terminal</strong>'e yapıştırdığından emin ol. Başlat'a sağ tıkla → Terminal (Yönetici).</p>
+
+<h2>"Bu sistemde betiklerin çalıştırılması devre dışı" hatası</h2>
+<p><code>irm | iex</code> yöntemi bu kısıtlamadan etkilenmez. İndirdiğin <code>.ps1</code> dosyasını çalıştırırken bu hatayı alırsan şu komutla çalıştır:</p>
+<pre><code>powershell -ExecutionPolicy Bypass -File .\henox.ps1</code></pre>
+
+<h2>Bağlantı hatası / script indirilemiyor</h2>
+<p>Bazı internet sağlayıcıları veya kurumsal ağlar engelleyebilir. DNS'ini değiştirmeyi (1.1.1.1) dene ya da <a href="/henox.ps1">henox.ps1</a>'i tarayıcıdan indirip dosyadan çalıştır.</p>
+
+<h2>Pencere açılıyor ama hemen kapanıyor</h2>
+<p>Siyah PowerShell penceresi Henox Tweak'in kendisidir; kapatırsan uygulama da kapanır. Açık bırak. Sorun devam ederse PowerShell'de hata mesajını kopyalayıp <a href="https://github.com/Henox77/henox-tweak/issues">issue</a> aç.</p>
+
+<h2>Uygulamalar sekmesi "winget bulunamadı" diyor</h2>
+<p>Microsoft Store'dan <strong>Uygulama Yükleyicisi</strong>'ni (App Installer) kur veya güncelle, sonra Henox Tweak'i yeniden aç.</p>
+
+<h2>Bir uygulama kurulamıyor</h2>
+<ul>
+  <li>Program açıksa kapat ve tekrar dene.</li>
+  <li>Günlükteki winget kodunu not al; <code>0x8A15...</code> ile başlayan kodlar winget hatasıdır.</li>
+  <li>Bazı üreticilerin sunucuları zaman zaman yavaştır; birkaç dakika sonra tekrar dene.</li>
+</ul>
+
+<h2>Geri yükleme noktası oluşturulamadı</h2>
+<p>Sistem Koruması grup ilkesiyle kapatılmış olabilir veya diskte yeterli yer olmayabilir. Tweakler yine de uygulanır ve Henox Tweak'in kendi yedeğiyle geri alınabilir.</p>
+
+<h2>Tweak "uygulandı" ama değişiklik görünmüyor</h2>
+<p>Tweak'in yeniden başlatma etiketine bak: bazıları Dosya Gezgini'nin yenilenmesini, oturumun kapatılıp açılmasını veya bilgisayarın yeniden başlatılmasını gerektirir. Bazı ayarlar kurumsal grup ilkeleri tarafından da ezilebilir.</p>
+
+<h2>Görev çubuğu bir an kayboldu</h2>
+<p>Normal. Dosya Gezgini yeniden başlatılırken görev çubuğu bir saniyeliğine kaybolup geri gelir.</p>

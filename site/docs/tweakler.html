@@ -1,0 +1,50 @@
+<!--meta {"title":"Tweakler","slug":"/rehber/tweakler/","group":"Kullanım Rehberi","order":4,"desc":"Tweak kategorileri, hazır seçimler, risk seviyeleri, tercihler ve DNS değiştirici.","intro":"{{tweaks}} tweak; gizlilik, performans, oyun, arayüz, Windows Update ve gelişmiş kategorilerinde."} -->
+<h2>Ekran düzeni</h2>
+<ul>
+  <li><strong>Üst çubuk:</strong> hazır seçimler (Önerilen, Oyuncu, Uygulanmışları getir, Temizle) ve İçe / Dışa aktar.</li>
+  <li><strong>Sol taraf:</strong> onay kutulu tweakler. Seçip alttaki <strong>Tweakleri çalıştır</strong> ile toplu uygularsın.</li>
+  <li><strong>Sağ taraf:</strong> <strong>Tercihler</strong>. Anahtara dokunduğun an uygulanır, kapatınca eski haline döner. Altında DNS değiştirici var.</li>
+  <li><strong>Satırın sağındaki nokta:</strong> yeşilse o tweak bu bilgisayarda zaten uygulanmış demektir.</li>
+</ul>
+<p>Bir tweak'in üzerine gelince açıklaması, riski ve kayıt defterinde tam olarak neyi değiştirdiği görünür. Hepsinin tam listesi <a href="/araclar/tweak-gezgini/">Tweak Gezgini</a>'nde.</p>
+
+<h2>Hazır seçimler</h2>
+<h3>Önerilen</h3>
+<p>Herkes için güvenli, düşük riskli tweakler: telemetri, reklam kimliği, Başlat menüsü önerileri, Bing araması, Copilot / Recall, arka plan uygulamaları, Edge'in arka planda çalışması, menü gecikmesi, hızlı başlatma, zorla yeniden başlatma ve güncelleme paylaşımı.</p>
+<h3>Oyuncu</h3>
+<p>Önerilen'in büyük bölümüne ek olarak Oyun Modu, Game DVR kapatma, donanım hızlandırmalı GPU zamanlaması, fare ivmesini kapatma, yapışkan tuşlar uyarısı, multimedya zamanlayıcısı ve Nihai Performans güç planı.</p>
+<h3>Uygulanmışları getir</h3>
+<p>Bu bilgisayarda şu an uygulanmış olanları seçer. Toplu geri almak için önce bunu, sonra <strong>Seçilenleri geri al</strong>'ı kullan.</p>
+
+<h2>Risk seviyeleri</h2>
+<table>
+  <thead><tr><th>Etiket</th><th>Anlamı</th></tr></thead>
+  <tbody>
+    <tr><td>(etiketsiz)</td><td>Düşük risk. Yan etkisi yok ya da çok küçük.</td></tr>
+    <tr><td>ORTA RİSK</td><td>Bir özelliği kapatır veya bazı sistemlerde istenmeyen sonuç verebilir (ör. hazırda bekletme, arama dizinlemesi, yazıcı servisi). Açıklamayı oku.</td></tr>
+  </tbody>
+</table>
+<p>Orta riskli bir tweak seçtiysen, uygulamadan önceki onay penceresinde ayrıca listelenir.</p>
+
+<h2>Yeniden başlatma gerektirenler</h2>
+<ul>
+  <li><strong>Gezgin yenilenir:</strong> Henox Tweak, işlem bitince Dosya Gezgini'ni yeniden başlatmayı önerir (görev çubuğu bir saniyeliğine kaybolur).</li>
+  <li><strong>Oturum kapat-aç:</strong> Fare ve görsel efekt ayarları gibi; oturumu kapatıp açınca etkinleşir.</li>
+  <li><strong>YENİDEN BAŞLAT:</strong> GPU zamanlaması, multimedya zamanlayıcısı gibi; bilgisayar yeniden başlayınca etkinleşir.</li>
+</ul>
+
+<h2>DNS değiştirici</h2>
+<p>Sağ sütunun altındaki düğmelerle bağlı ağ bağdaştırıcılarının DNS sunucusunu değiştirebilirsin:</p>
+<table>
+  <thead><tr><th>Seçenek</th><th>Adres</th><th>Not</th></tr></thead>
+  <tbody>
+    <tr><td>Cloudflare</td><td><code>1.1.1.1</code></td><td>Hızlı, gizlilik odaklı</td></tr>
+    <tr><td>Google</td><td><code>8.8.8.8</code></td><td>Güvenilir ve yaygın</td></tr>
+    <tr><td>Quad9</td><td><code>9.9.9.9</code></td><td>Zararlı siteleri engeller</td></tr>
+    <tr><td>AdGuard</td><td><code>94.140.14.14</code></td><td>Reklam ve izleyicileri engeller</td></tr>
+    <tr><td>Otomatik</td><td>İnternet sağlayıcın</td><td>Varsayılana döner</td></tr>
+  </tbody>
+</table>
+
+<h2>İçe / dışa aktarma</h2>
+<p><strong>Dışa aktar</strong>, seçili tweakleri, açık tercihleri ve seçili uygulamaları bir JSON dosyasına kaydeder. Başka bir bilgisayarda <strong>İçe aktar</strong> ile yükleyebilir veya <a href="/rehber/otomasyon/">otomasyon</a> ile tek komutla uygulayabilirsin.</p>

@@ -1,0 +1,26 @@
+<!--meta {"title":"Geri Alma ve Yedekler","slug":"/rehber/geri-alma/","group":"Kullanım Rehberi","order":8,"desc":"Bir tweak'i veya hepsini geri alma, yedek dosyası, günlükler ve geri yükleme noktaları.","intro":"Henox Tweak'te yaptığın her şey geri alınabilir. Bu sayfa nasıl olduğunu anlatır."} -->
+<h2>Yedekleme nasıl çalışır?</h2>
+<p>Bir tweak'i ilk kez uyguladığında Henox Tweak, değiştireceği her kayıt defteri değerinin ve servis başlangıç türünün <strong>o anki</strong> halini şu dosyaya yazar:</p>
+<pre><code>%ProgramData%\HenoxTweak\backup.json</code></pre>
+<p>Geri alırken bu yedekteki değerler kullanılır. Yani tweak senin bilgisayarındaki gerçek orijinal haline döner, genel bir "varsayılan" değere değil. Yedek bulunamazsa (ör. dosyayı sildiysen) tweak tanımındaki Windows varsayılanı kullanılır.</p>
+
+<h2>Geri almanın üç yolu</h2>
+<h3>1. Tek tek</h3>
+<p>Tweakler sekmesinde geri almak istediğin tweakleri işaretle ve <strong>Seçilenleri geri al</strong>'a bas. Uygulanmış olanları hızlıca bulmak için <strong>Uygulanmışları getir</strong>'i kullan. Tercihler (sağ sütun) için anahtarı kapatman yeterli.</p>
+<h3>2. Hepsini birden</h3>
+<p>Sağ üstteki <strong>ⓘ</strong> düğmesiyle Hakkında sayfasını aç ve <strong>Yapılan tüm tweakleri geri al</strong>'a bas. Henox Tweak'in yedeğini tuttuğu her şey orijinal haline döner.</p>
+<h3>3. Geri yükleme noktası</h3>
+<p>"Önce geri yükleme noktası" seçeneği açıkken (varsayılan) her toplu uygulamadan önce bir Windows geri yükleme noktası oluşturulur. En kötü durumda <strong>Onarım → Sistem Geri Yükleme'yi aç</strong> ile o noktaya dönebilirsin.</p>
+<div class="callout warn"><b class="t"><svg><use href="#i-tri"/></svg>Windows sınırı</b><p>Windows varsayılan olarak 24 saatte bir geri yükleme noktası oluşturulmasına izin verir. Henox Tweak bu sınırı işlem süresince geçici olarak kaldırır ve sonra eski haline getirir. Sistem Koruması kapalıysa sistem sürücüsü için açar.</p></div>
+
+<h2>Günlükler</h2>
+<p>Her oturumun tüm işlemleri zaman damgasıyla şuraya yazılır:</p>
+<pre><code>%ProgramData%\HenoxTweak\logs\</code></pre>
+<p>Uygulama içinde alt çubuktaki <strong>Günlük</strong> düğmesiyle canlı günlüğü açabilirsin. Hata bildirirken son günlük dosyasını eklemen çok yardımcı olur.</p>
+
+<h2>Neler geri alınamaz?</h2>
+<ul>
+  <li><strong>Temizlik:</strong> Silinen geçici dosyalar ve boşaltılan Geri Dönüşüm Kutusu geri gelmez.</li>
+  <li><strong>Debloat:</strong> Kaldırılan uygulamalar geri alınamaz ama Microsoft Store'dan tekrar kurulabilir.</li>
+  <li><strong>Uygulama kurulumu:</strong> Kurulan programı Uygulamalar sekmesinden veya Windows Ayarlar'dan kaldırabilirsin.</li>
+</ul>

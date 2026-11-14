@@ -1,0 +1,30 @@
+<!--meta {"title":"Onarım ve Ağ","slug":"/rehber/onarim-ve-ag/","group":"Kullanım Rehberi","order":7,"desc":"SFC, DISM, Windows Update onarımı, ağ sıfırlama ve Windows araçları.","intro":"Forumlardan kopyalanan onarım komutları artık tek düğme."} -->
+<h2>Sistem onarımı</h2>
+<table>
+  <thead><tr><th>Araç</th><th>Ne zaman kullanılır</th></tr></thead>
+  <tbody>
+    <tr><td>Sistem dosyalarını onar (SFC)</td><td>Mavi ekran, açılmayan Windows uygulamaları, garip hatalar. 10-20 dakika sürer, ayrı pencerede çalışır.</td></tr>
+    <tr><td>Windows imajını onar (DISM)</td><td>SFC "bazı dosyalar onarılamadı" diyorsa önce bunu, sonra tekrar SFC'yi çalıştır. İnternet gerekir.</td></tr>
+    <tr><td>Bileşen deposunu temizle</td><td>Eski güncelleme kalıntılarını siler, birkaç GB yer açabilir.</td></tr>
+    <tr><td>Windows Update'i onar</td><td>Takılan, %0'da kalan veya sürekli hata veren güncellemeler. Update önbelleğini sıfırlar.</td></tr>
+    <tr><td>Geri yükleme noktası oluştur</td><td>Büyük bir değişiklikten önce sistemin halini kaydetmek için.</td></tr>
+    <tr><td>Sistem Geri Yükleme</td><td>Bir sorun çıktıysa önceki bir noktaya dönmek için.</td></tr>
+  </tbody>
+</table>
+<div class="callout"><b class="t"><svg><use href="#i-info"/></svg>Doğru sıra</b><p>Windows'ta bir şeyler bozuksa: önce <strong>DISM</strong>, bittikten sonra <strong>SFC</strong>, sonra yeniden başlat.</p></div>
+
+<h2>Ağ</h2>
+<ul>
+  <li><strong>DNS önbelleğini temizle:</strong> Açılmayan siteler veya <code>DNS_PROBE_FINISHED_NXDOMAIN</code> hataları için ilk denenecek şey.</li>
+  <li><strong>Ağ ayarlarını sıfırla:</strong> Winsock ve TCP/IP yığınını sıfırlar. İnternet hiç çalışmıyorsa son çare. VPN ve elle girilmiş IP ayarların silinebilir; sonrasında yeniden başlatman gerekir.</li>
+  <li><strong>DNS değiştirici:</strong> Tweakler sekmesinin sağ sütununda. Ayrıntılar <a href="/rehber/tweakler/#dns-degistirici">Tweakler</a> sayfasında.</li>
+</ul>
+
+<h2>Gezgin</h2>
+<ul>
+  <li><strong>Dosya Gezgini'ni yeniden başlat:</strong> Donan görev çubuğu, açılmayan Başlat menüsü veya masaüstü için.</li>
+  <li><strong>Simge önbelleğini yenile:</strong> Boş, bozuk veya yanlış görünen simgeler için.</li>
+</ul>
+
+<h2>Windows araçları</h2>
+<p>Aygıt Yöneticisi, Hizmetler, Programlar ve Özellikler, Güç Seçenekleri, Ağ Bağlantıları, Sistem Özellikleri, Olay Görüntüleyici, Sistem Bilgisi, Kayıt Defteri, Ses Ayarları, Disk Yönetimi ve Görev Yöneticisi'ne tek tıkla ulaş.</p>

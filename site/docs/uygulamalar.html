@@ -1,0 +1,35 @@
+<!--meta {"title":"Uygulamalar","slug":"/rehber/uygulamalar/","group":"Kullanım Rehberi","order":3,"desc":"winget ile popüler programları tek seferde kurma, kaldırma ve güncelleme.","intro":"Formattan sonra 30 farklı siteyi gezmek yerine ihtiyacın olan programları seç ve tek seferde kur."} -->
+<h2>Nasıl çalışır?</h2>
+<p>Uygulamalar sekmesi, Microsoft'un resmi paket yöneticisi <strong>winget</strong>'i kullanır. Programlar üreticinin resmi kurulum dosyasından, en güncel sürümüyle ve sessiz modda kurulur. Kurulum sırasında "araç çubuğu da kurulsun mu?" gibi ek yazılım teklifleri çıkmaz.</p>
+
+<h2>Uygulama kurmak</h2>
+<ol>
+  <li>Kategorilerden istediğin programları işaretle. Sağ üstteki arama kutusuyla (<code>Ctrl F</code>) filtreleyebilirsin.</li>
+  <li>Sol paneldeki <strong>Seçilenleri kur</strong> düğmesine bas.</li>
+  <li>İlerlemeyi alt çubuktan, ayrıntıları <strong>Günlük</strong> çekmecesinden izle.</li>
+</ol>
+<p>Zaten kurulu olan programların yanında yeşil <strong>kurulu</strong> yazısı görünür. Kurulu bir programı seçip "Seçilenleri kur"a basarsan güncel değilse güncellenir.</p>
+
+<h2>Sol paneldeki düğmeler</h2>
+<table>
+  <thead><tr><th>Düğme</th><th>İşlev</th></tr></thead>
+  <tbody>
+    <tr><td>Seçilenleri kur</td><td>İşaretli programları kurar (veya günceller).</td></tr>
+    <tr><td>Seçilenleri kaldır</td><td>İşaretli programları winget ile kaldırır. Önce onay ister.</td></tr>
+    <tr><td>Kurulu her şeyi güncelle</td><td><code>winget upgrade --all</code> çalıştırır; listede olmayan programlar da dahil.</td></tr>
+    <tr><td>Kurulu olanları seç</td><td>Listedeki programlardan bilgisayarında kurulu olanları işaretler.</td></tr>
+    <tr><td>Sadece seçilenleri göster</td><td>Listeyi işaretli programlarla sınırlar; kurmadan önce kontrol için kullanışlı.</td></tr>
+  </tbody>
+</table>
+
+<h2>Microsoft Store sürümleri</h2>
+<p>WhatsApp ve Spotify, Microsoft Store kaynağından (<code>msstore</code>) kurulur. Spotify'ın normal kurulum dosyası yönetici olarak çalıştırılmayı reddettiği için Store sürümü tercih edilmiştir.</p>
+
+<h2>winget yoksa</h2>
+<p>Windows 11'de winget hazır gelir. Windows 10'da Microsoft Store'dan <strong>Uygulama Yükleyicisi</strong>'ni (App Installer) kurup güncellemen gerekir. winget bulunamazsa Henox Tweak bunu sol panelde söyler ve Store sayfasını açan bir düğme gösterir.</p>
+
+<h2>Sık karşılaşılan durumlar</h2>
+<ul>
+  <li><strong>"zaten kurulu ve güncel"</strong>: Hata değildir; program zaten son sürümde.</li>
+  <li><strong>Kurulum başarısız (winget kodu ...)</strong>: Genelde internet bağlantısı, açık kalan program veya üreticinin sunucusundan kaynaklanır. Programı kapatıp tekrar dene; günlükteki satırları <a href="https://github.com/Henox77/henox-tweak/issues">issue</a> açarken ekle.</li>
+</ul>

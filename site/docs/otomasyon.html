@@ -1,0 +1,28 @@
+<!--meta {"title":"Otomasyon","slug":"/rehber/otomasyon/","group":"Kullanım Rehberi","order":9,"desc":"Kaydedilmiş bir ayar dosyasını -Config ve -Run ile tek komutla uygulama.","intro":"Bir kez hazırla, her format sonrası tek komutla aynı kurulumu uygula."} -->
+<h2>Ayar dosyası</h2>
+<p>Henox Tweak ayar dosyası, uygulanacak tweaklerin ve kurulacak uygulamaların kimliklerini içeren basit bir JSON dosyasıdır:</p>
+<pre><code>{
+  "henoxTweak": "{{version}}",
+  "tweaks": ["telemetri", "reklamkimligi", "oneriler", "gamedvr", "uzantilar"],
+  "apps": ["Google.Chrome", "Discord.Discord", "Valve.Steam", "7zip.7zip"]
+}</code></pre>
+<p>Bu dosyayı iki şekilde oluşturabilirsin:</p>
+<ul>
+  <li>Uygulamada seçimini yapıp Tweakler sekmesindeki <strong>Dışa aktar</strong> ile.</li>
+  <li>Tarayıcıda <a href="/araclar/yapilandirma/">Yapılandırma Oluşturucu</a> ile, Henox Tweak'i hiç açmadan.</li>
+</ul>
+
+<h2>Arayüzden içe aktarma</h2>
+<p>Tweakler sekmesinde <strong>İçe aktar</strong>'a bas ve dosyayı seç. Tweakler ve uygulamalar işaretlenir; sen gözden geçirip uygularsın. Dosyada tercih (sağ sütundaki anahtarlar) varsa, açılmaları için ayrıca sorulur.</p>
+
+<h2>Tek komutla otomatik uygulama</h2>
+<p>Yönetici PowerShell'de şu komut, ayar dosyasını yükler ve <strong>onay sormadan</strong> uygular: önce bir geri yükleme noktası oluşturur, tweakleri uygular, ardından uygulamaları kurar.</p>
+<pre><code>&amp; ([scriptblock]::Create((irm tweak.henox.dev/run))) -Config "C:\henox-ayarlarim.json" -Run</code></pre>
+<p><code>-Run</code> olmadan çalıştırırsan dosya sadece yüklenir ve seçimler işaretlenir; uygulamak sana kalır.</p>
+<h3>Ayar dosyası internetteyse</h3>
+<p><code>-Config</code> bir web adresi de olabilir (ör. GitHub Gist'teki ham dosya):</p>
+<pre><code>&amp; ([scriptblock]::Create((irm tweak.henox.dev/run))) -Config "https://gist.githubusercontent.com/.../henox.json" -Run</code></pre>
+<div class="callout warn"><b class="t"><svg><use href="#i-tri"/></svg>Dikkat</b><p><code>-Run</code> modu onay pencerelerini atlar. Yalnızca içeriğini bildiğin, kendi hazırladığın ayar dosyalarıyla kullan.</p></div>
+
+<h2>Kimlikleri nereden bulurum?</h2>
+<p>Tweak kimlikleri <a href="/araclar/tweak-gezgini/">Tweak Gezgini</a>'nde her tweak'in detayında, uygulama kimlikleri ise winget paket kimlikleridir (uygulamada bir programın üzerine gelince görünür).</p>

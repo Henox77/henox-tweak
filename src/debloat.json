@@ -1,0 +1,31 @@
+{
+  "apps": [
+    { "pkg": "Microsoft.BingNews",                 "name": "Microsoft Haberler",        "safe": true,  "desc": "Haber akışı uygulaması" },
+    { "pkg": "Microsoft.BingWeather",              "name": "Hava Durumu",               "safe": false, "desc": "Kullanıyorsan bırak" },
+    { "pkg": "Microsoft.BingSearch",               "name": "Bing Arama",                "safe": true,  "desc": "Bing arama bileşeni" },
+    { "pkg": "Microsoft.GetHelp",                  "name": "Yardım Al",                 "safe": true,  "desc": "Microsoft destek uygulaması" },
+    { "pkg": "Microsoft.Getstarted",               "name": "İpuçları",                  "safe": true,  "desc": "Windows ipuçları" },
+    { "pkg": "Microsoft.MicrosoftSolitaireCollection", "name": "Solitaire Collection",  "safe": true,  "desc": "Reklamlı kart oyunları" },
+    { "pkg": "Microsoft.WindowsFeedbackHub",       "name": "Geri Bildirim Merkezi",     "safe": true,  "desc": "Microsoft'a geri bildirim" },
+    { "pkg": "Microsoft.Todos",                    "name": "Microsoft To Do",           "safe": false, "desc": "Yapılacaklar listesi" },
+    { "pkg": "Microsoft.PowerAutomateDesktop",     "name": "Power Automate",            "safe": true,  "desc": "İş akışı otomasyonu" },
+    { "pkg": "Clipchamp.Clipchamp",                "name": "Clipchamp",                 "safe": true,  "desc": "Web tabanlı video editörü" },
+    { "pkg": "Microsoft.MicrosoftOfficeHub",       "name": "Microsoft 365 (Office) Hub","safe": true,  "desc": "Office reklam/başlatıcısı (Office'in kendisi değil)" },
+    { "pkg": "Microsoft.WindowsMaps",              "name": "Haritalar",                 "safe": true,  "desc": "Çevrimdışı haritalar" },
+    { "pkg": "Microsoft.People",                   "name": "Kişiler",                   "safe": true,  "desc": "Eski kişiler uygulaması" },
+    { "pkg": "Microsoft.549981C3F5F10",            "name": "Cortana",                   "safe": true,  "desc": "Türkçe desteklemeyen asistan" },
+    { "pkg": "MSTeams",                            "name": "Teams (ücretsiz)",          "safe": true,  "desc": "Önceden yüklü kişisel Teams" },
+    { "pkg": "MicrosoftTeams",                     "name": "Teams (eski)",              "safe": true,  "desc": "Eski Teams sohbet uygulaması" },
+    { "pkg": "Microsoft.OutlookForWindows",        "name": "Yeni Outlook",              "safe": false, "desc": "Posta kullanıyorsan bırak" },
+    { "pkg": "Microsoft.Copilot",                  "name": "Copilot uygulaması",        "safe": true,  "desc": "Microsoft Copilot" },
+    { "pkg": "Microsoft.Windows.DevHome",          "name": "Dev Home",                  "safe": true,  "desc": "Geliştirici paneli" },
+    { "pkg": "Microsoft.ZuneVideo",                "name": "Filmler ve TV",             "safe": true,  "desc": "Eski video oynatıcı" },
+    { "pkg": "Microsoft.MixedReality.Portal",      "name": "Karma Gerçeklik Portalı",   "safe": true,  "desc": "VR başlığın yoksa gereksiz" },
+    { "pkg": "Microsoft.SkypeApp",                 "name": "Skype",                     "safe": true,  "desc": "Kapatılan servis" },
+    { "pkg": "Microsoft.YourPhone",                "name": "Telefon Bağlantısı",        "safe": false, "desc": "Android/iPhone'u PC'ye bağlıyorsan bırak" },
+    { "pkg": "Microsoft.MicrosoftStickyNotes",     "name": "Yapışkan Notlar",           "safe": false, "desc": "Not tutuyorsan bırak" },
+    { "pkg": "Microsoft.WindowsAlarms",            "name": "Saat ve Alarmlar",          "safe": false, "desc": "Alarm/zamanlayıcı" },
+    { "pkg": "Microsoft.GamingApp",                "name": "Xbox uygulaması",           "safe": false, "desc": "Game Pass kullanıyorsan KALDIRMA" },
+    { "pkg": "Microsoft.XboxGamingOverlay",        "name": "Xbox Game Bar",             "safe": false, "desc": "Win+G paneli. Bazı oyunlar ve kayıt için gerekir" }
+  ]
+}

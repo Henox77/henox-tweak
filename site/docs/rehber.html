@@ -1,0 +1,55 @@
+<!--meta {"title":"Genel Bakış","slug":"/rehber/","group":"Kullanım Rehberi","order":1,"desc":"Henox Tweak nedir, kimler için, neler yapar ve güvenlik ilkeleri.","intro":"Henox Tweak'in resmi kullanım rehberine hoş geldin. Türkçe, ücretsiz ve açık kaynak Windows kurulum ve iyileştirme aracı."} -->
+<div class="callout warn"><b class="t"><svg><use href="#i-tri"/></svg>Önce oku</b><p>Henox Tweak sistem ayarlarını değiştirir. Her tweak geri alınabilir olsa da, önemli değişikliklerden önce "Önce geri yükleme noktası" seçeneğini açık bırakman önerilir (varsayılan olarak açıktır).</p></div>
+
+<h2>Henox Tweak nedir?</h2>
+<p>Henox Tweak, Windows'u kurduktan sonra yapılan sıkıcı işleri tek pencerede toplayan bir PowerShell aracıdır. WinUtil'i kullandıysan kendini evinde hissedeceksin: onun Türkçe ve genişletilmiş bir alternatifi gibi düşünebilirsin.</p>
+<ul>
+  <li><strong>Uygulama kurulumu:</strong> {{apps}} popüler programı resmi winget deposundan tek seferde kur.</li>
+  <li><strong>Tweakler:</strong> {{tweaks}} gizlilik, performans, oyun ve arayüz ayarı; her biri Türkçe açıklamalı ve geri alınabilir.</li>
+  <li><strong>Debloat:</strong> Windows ile gelen gereksiz uygulamaları kaldır.</li>
+  <li><strong>Başlangıç ve temizlik:</strong> Açılışta başlayan programları yönet, gereksiz dosyaları temizle.</li>
+  <li><strong>Onarım ve ağ:</strong> SFC, DISM, Windows Update onarımı, ağ sıfırlama ve DNS değiştirici.</li>
+</ul>
+
+<h2>Kimler için?</h2>
+<ul>
+  <li><strong>Ev kullanıcıları:</strong> Bilgisayarı yavaşlayan, reklam ve gereksiz uygulamalardan sıkılanlar.</li>
+  <li><strong>Oyuncular:</strong> Arka plan yükünü, Game DVR'ı ve fare ivmesini kapatıp daha tutarlı oyun deneyimi isteyenler.</li>
+  <li><strong>Format atanlar:</strong> Her kurulumda aynı programları ve ayarları tekrar tekrar yapmak istemeyenler.</li>
+  <li><strong>Gizliliğe önem verenler:</strong> Telemetriyi, reklam kimliğini, Copilot ve Recall'ı kapatmak isteyenler.</li>
+</ul>
+
+<h2>Arayüz</h2>
+<p>Henox Tweak üstte sekmeler, sağ üstte arama kutusu (<code>Ctrl F</code>) ve tema düğmesi olan tek bir penceredir. Açık ve koyu tema arasında geçiş yapabilirsin; ilk açılışta Windows temanı otomatik algılar.</p>
+<table>
+  <thead><tr><th>Sekme</th><th>Ne yapar</th></tr></thead>
+  <tbody>
+    <tr><td>Panel</td><td>Donanımını okur, RAM / disk doluluğunu ve açık kalma süresini ölçer, sana özel öneriler verir. Hiçbir şeyi değiştirmez.</td></tr>
+    <tr><td>Uygulamalar</td><td>Kategorilere ayrılmış uygulamaları seç, kur, kaldır veya güncelle.</td></tr>
+    <tr><td>Tweakler</td><td>Solda onay kutulu tweakler, sağda anında uygulanan tercihler ve DNS değiştirici.</td></tr>
+    <tr><td>Debloat</td><td>Önceden yüklü Microsoft uygulamalarını kaldır.</td></tr>
+    <tr><td>Başlangıç</td><td>Açılışta kendiliğinden başlayan programları anahtarla aç / kapat.</td></tr>
+    <tr><td>Temizlik</td><td>Geçici dosyaları ve önbellekleri tara, sonra temizle.</td></tr>
+    <tr><td>Onarım</td><td>Sistem onarım araçları ve Windows yönetim panellerine kısayollar.</td></tr>
+  </tbody>
+</table>
+
+<h2>Güvenlik ilkeleri</h2>
+<ul>
+  <li><strong>Her zaman:</strong> Değişiklikten önce orijinal değer yedeklenir, her işlem günlüğe yazılır.</li>
+  <li><strong>Her zaman:</strong> Riskli tweakler "ORTA RİSK" etiketiyle işaretlenir ve uygulamadan önce ayrıca uyarılırsın.</li>
+  <li><strong>Asla:</strong> Windows Defender, Güvenlik Duvarı veya UAC kapatılmaz.</li>
+  <li><strong>Asla:</strong> Kullanım verisi toplanmaz veya gönderilmez.</li>
+  <li><strong>Asla:</strong> Kişisel dosyalarına (Belgeler, Masaüstü, İndirilenler) dokunulmaz.</li>
+</ul>
+
+<h2>Sistem gereksinimleri</h2>
+<ul>
+  <li>Windows 10 (1809 ve üzeri) veya Windows 11</li>
+  <li>Windows PowerShell 5.1 (Windows ile birlikte gelir)</li>
+  <li>Yönetici hesabı</li>
+  <li>Uygulama kurulumu için winget (Windows 11'de hazır gelir; Windows 10'da Microsoft Store'daki "Uygulama Yükleyicisi")</li>
+</ul>
+
+<h2>Yardım almak</h2>
+<p>Bir sorunla karşılaşırsan önce <a href="/bilinen-sorunlar/">Bilinen Sorunlar</a> ve <a href="/sss/">SSS</a> sayfalarına bak. Çözüm yoksa <a href="https://github.com/Henox77/henox-tweak/issues">GitHub'da issue aç</a> ve <code>%ProgramData%\HenoxTweak\logs</code> klasöründeki son günlüğü ekle.</p>

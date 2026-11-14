@@ -1,0 +1,22 @@
+<!--meta {"title":"Yapılandırma Oluşturucu","slug":"/araclar/yapilandirma/","group":"Araçlar","order":2,"desc":"Tweak ve uygulama seçimini tarayıcıda hazırla, JSON olarak indir ve tek komutla uygula.","intro":"Seçimini burada hazırla, ayar dosyasını indir, sonraki her kurulumda tek komutla uygula.","toc":false,"scripts":["/assets/builder.js"]} -->
+<div class="tool-bar">
+  <span style="color:var(--dim);font-size:14px">Hazır seçim:</span>
+  <div class="chips">
+    <button class="chip" data-preset="onerilen">Önerilen</button>
+    <button class="chip" data-preset="oyuncu">Oyuncu</button>
+    <button class="chip" data-preset="none">Temizle</button>
+  </div>
+</div>
+<div class="builder">
+  <div id="bmain"><div style="color:var(--dim)">Yükleniyor...</div></div>
+  <aside class="bside">
+    <h3>Ayar dosyan</h3>
+    <div class="n" id="bcount">0 tweak · 0 uygulama</div>
+    <pre id="bjson">{}</pre>
+    <button class="btn btn-pri" id="bdl"><svg><use href="#i-download"/></svg>henox-ayarlarim.json indir</button>
+    <p class="n" style="margin-top:16px">İndirdikten sonra Yönetici PowerShell'de çalıştır:</p>
+    <div class="code" id="bcmd"></div>
+    <button class="btn" id="bcopy"><svg><use href="#i-copy"/></svg><span>Komutu kopyala</span></button>
+    <p class="n" style="margin-top:12px;font-size:12.5px">Komut onay sormadan uygular. Önce sadece incelemek istersen <code>-Run</code> kısmını sil. Ayrıntılar: <a href="/rehber/otomasyon/" style="color:var(--acc)">Otomasyon</a>.</p>
+  </aside>
+</div>

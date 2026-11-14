@@ -1,0 +1,51 @@
+<!--meta {"title":"Katkıda Bulunma","slug":"/katki/","group":"Yardım","order":3,"desc":"Henox Tweak'e yeni tweak, uygulama veya düzeltme ekleme rehberi.","intro":"Henox Tweak açık kaynaktır; yeni tweak, uygulama ve düzeltmeler memnuniyetle karşılanır."} -->
+<h2>Proje yapısı</h2>
+<pre><code>src/
+  app.ps1        Arayüz mantığı, sekmeler, arka plan işleri
+  core.ps1       Kayıt defteri, servis, yedekleme ve temizlik fonksiyonları
+  window.xaml    WPF arayüz tasarımı, tema ve animasyonlar
+  tweaks.json    Tweak tanımları
+  apps.json      winget uygulama listesi
+  debloat.json   Kaldırılabilir önceden yüklü uygulamalar
+site/            tweak.henox.dev web sitesi
+build.mjs        Her şeyi tek dosyalık public/henox.ps1'e derler</code></pre>
+
+<h2>Derleme ve deneme</h2>
+<pre><code>node build.mjs
+powershell -ExecutionPolicy Bypass -File public\henox.ps1</code></pre>
+<p>Arayüzü yönetici izni olmadan (salt görüntüleme) denemek için <code>$env:HENOX_DEV = '1'</code> ayarlayabilirsin.</p>
+
+<h2>Yeni tweak eklemek</h2>
+<p><code>src/tweaks.json</code> içine bir nesne ekle. Kayıt defteri tabanlı tweakler için <code>registry</code> dizisi yeterli; orijinal değer otomatik yedeklenir ve geri alınır.</p>
+<pre><code>{
+  "id": "ornek", "cat": "arayuz", "risk": "dusuk", "preset": [], "restart": "explorer",
+  "name": "Kısa ve net başlık",
+  "desc": "Ne yaptığını ve yan etkisini sade Türkçe ile anlat.",
+  "registry": [
+    { "path": "HKCU:\\Software\\...", "name": "Deger", "type": "DWord", "value": 0, "original": 1 }
+  ]
+}</code></pre>
+<table>
+  <thead><tr><th>Alan</th><th>Değerler</th></tr></thead>
+  <tbody>
+    <tr><td><code>cat</code></td><td><code>gizlilik</code>, <code>performans</code>, <code>oyun</code>, <code>arayuz</code> (sağ sütunda anahtar olur), <code>guncelleme</code>, <code>gelismis</code></td></tr>
+    <tr><td><code>risk</code></td><td><code>dusuk</code>, <code>orta</code>, <code>yuksek</code></td></tr>
+    <tr><td><code>preset</code></td><td><code>onerilen</code>, <code>oyuncu</code></td></tr>
+    <tr><td><code>restart</code></td><td><code>yok</code>, <code>explorer</code>, <code>oturum</code>, <code>pc</code></td></tr>
+    <tr><td><code>type</code></td><td><code>DWord</code>, <code>QWord</code>, <code>String</code>, <code>Binary</code> (<code>"90,12,03"</code> biçiminde)</td></tr>
+    <tr><td><code>original</code></td><td>Yedek yoksa kullanılacak Windows varsayılanı. Değer hiç yoksa <code>"&lt;sil&gt;"</code>.</td></tr>
+  </tbody>
+</table>
+<p>Kayıt defteriyle yapılamayan işler için <code>script</code> ve <code>undo</code> (ikisi birlikte zorunlu), durum tespiti için <code>check</code> kullan. Servisler için <code>services</code>, zamanlanmış görevler için <code>tasks</code> dizileri var.</p>
+
+<h2>Yeni uygulama eklemek</h2>
+<p><code>src/apps.json</code> içine ekle. Paket kimliğinin doğru olduğunu şu komutla kontrol et (çıkış kodu 0 olmalı):</p>
+<pre><code>winget show --id Paket.Kimligi --exact --source winget</code></pre>
+
+<h2>Kurallar</h2>
+<ul>
+  <li>Defender, Güvenlik Duvarı, UAC veya Windows Update'i tamamen kapatan tweakler kabul edilmez.</li>
+  <li>Her tweak geri alınabilir olmalı.</li>
+  <li>Açıklamalar Türkçe, sade ve dürüst olmalı: etkisi küçükse "küçük" yaz.</li>
+  <li>Mümkünse tweak'in ne yaptığını gösteren bir kaynak (Microsoft belgesi vb.) ekle.</li>
+</ul>

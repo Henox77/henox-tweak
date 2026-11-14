@@ -1,0 +1,30 @@
+<!--meta {"title":"Sık Sorulan Sorular","slug":"/sss/","group":"Yardım","order":1,"desc":"Virüs var mı, neden yönetici izni istiyor, FPS artar mı, nasıl geri alırım ve daha fazlası.","intro":"En çok sorulan sorular ve dürüst cevapları."} -->
+<h2>Virüs var mı? Neden güveneyim?</h2>
+<p>Güvenmek zorunda değilsin; kontrol edebilirsin. Henox Tweak derlenmiş bir EXE değil, düz metin bir PowerShell script'idir. Kodun tamamı <a href="https://github.com/Henox77/henox-tweak">GitHub'da</a> ve çalıştırdığın dosya oradaki kaynaktan derlenir. <a href="/#guvenlik">Ana sayfadaki</a> yöntemle indirip Not Defteri'nde okuyabilir, SHA256 parmak izini karşılaştırabilirsin.</p>
+
+<h2>Windows Defender veya SmartScreen uyarı verirse?</h2>
+<p><code>irm | iex</code> yöntemiyle genelde uyarı çıkmaz. İndirilen <code>.ps1</code> dosyasında "bu dosya internetten geldi" uyarısı görebilirsin; bu imzasız her script için standarttır. Kodu oku ve kendin karar ver. Herhangi bir antivirüsü kapatmanı <strong>asla</strong> istemeyiz.</p>
+
+<h2>Neden yönetici izni istiyor?</h2>
+<p>Servisler, <code>HKEY_LOCAL_MACHINE</code> kayıt defteri, uygulama kurulumu ve geri yükleme noktası gibi sistem genelindeki ayarlar yönetici izni olmadan değiştirilemez. Henox Tweak bu izni yalnızca senin seçtiğin işlemler için kullanır.</p>
+
+<h2>Oyunlarda FPS artar mı?</h2>
+<p>Dürüst cevap: biraz, ve çoğunlukla takılma (stutter) tarafında. Arka plan yükünü azaltmak, Game DVR'ı kapatmak ve açılışta başlayan programları temizlemek özellikle zayıf veya RAM'i az sistemlerde belirgin fark yaratır. "+%40 FPS" vaat eden araçlar yalan söylüyor. Asıl darboğaz ekran kartı, işlemci veya RAM ise hiçbir tweak bunu çözmez; Panel sekmesi böyle bir durumu sana açıkça söyler.</p>
+
+<h2>Bir şey bozulursa nasıl geri alırım?</h2>
+<p>Üç yol var: tek tek geri alma, "Yapılan tüm tweakleri geri al" ve Windows geri yükleme noktası. Ayrıntılar <a href="/rehber/geri-alma/">Geri Alma ve Yedekler</a> sayfasında.</p>
+
+<h2>Windows 10'da çalışır mı?</h2>
+<p>Evet. Windows 10 (1809 ve üzeri) ve Windows 11'de çalışır. Copilot, Recall, klasik sağ tık menüsü gibi bazı tweakler yalnızca Windows 11'de anlam taşır; Windows 10'da zararsızdır.</p>
+
+<h2>WinUtil'in Türkçesi mi?</h2>
+<p>Kısaca evet, ama resmi bir çeviri değil: Henox Tweak, Chris Titus Tech'in WinUtil'inden ilham alınarak sıfırdan yazılmış bağımsız bir Türkçe alternatif. Aynı tanıdık mantıkla çalışır (tek komut, sekmeler, tweak / uygulama / onarım). Farklarımız: tamamen Türkçe olması; her tweak'in ne yaptığını ve riskini sade dille anlatması; donanımını okuyup sana özel öneriler vermesi; senin bilgisayarındaki gerçek orijinal değerleri yedekleyip toplu geri alma sunması; başlangıç yöneticisi, akıllı temizlik ve DNS değiştirici gibi ek araçlar.</p>
+
+<h2>İnternete bağlanıyor mu? Veri gönderiyor mu?</h2>
+<p>Hiçbir kullanım verisi göndermez. İnternete yalnızca sen uygulama kurarken (winget) ve <code>irm</code> komutuyla script'i indirirken çıkılır.</p>
+
+<h2>Ücretli bir sürümü var mı?</h2>
+<p>Hayır. Henox Tweak tamamen ücretsiz ve MIT lisanslıdır. Bağış, premium özellik veya reklam yok.</p>
+
+<h2>Hata buldum veya öneri vermek istiyorum.</h2>
+<p><a href="https://github.com/Henox77/henox-tweak/issues">GitHub'da issue aç</a>. Hata bildirirken <code>%ProgramData%\HenoxTweak\logs</code> klasöründeki son günlük dosyasını ekle. Katkıda bulunmak istersen <a href="/katki/">Katkıda Bulunma</a> sayfasına bak.</p>

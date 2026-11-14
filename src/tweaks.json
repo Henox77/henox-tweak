@@ -1,0 +1,387 @@
+{
+  "categories": [
+    { "id": "gizlilik",   "name": "Gizlilik",            "desc": "Microsoft'a giden veri, reklam kimliği ve öneri reklamları" },
+    { "id": "performans", "name": "Performans",          "desc": "Arka plan yükü, güç planı ve sistem tepkiselliği" },
+    { "id": "oyun",       "name": "Oyun",                "desc": "Oyun sırasında gecikmeyi ve takılmayı azaltan ayarlar" },
+    { "id": "arayuz",     "name": "Arayüz",              "desc": "Dosya Gezgini, görev çubuğu ve Windows 11 rahatsızlıkları" },
+    { "id": "guncelleme", "name": "Windows Update",      "desc": "Güncellemelerin ne zaman ve nasıl geleceği" },
+    { "id": "gelismis",   "name": "Gelişmiş",            "desc": "Ne yaptığını biliyorsan aç. Her biri geri alınabilir" }
+  ],
+  "tweaks": [
+    {
+      "id": "telemetri", "cat": "gizlilik", "risk": "dusuk", "preset": ["onerilen", "oyuncu"], "restart": "yok",
+      "name": "Telemetriyi minimuma indir",
+      "desc": "Tanılama verisini en düşük seviyeye çeker, DiagTrack servisini ve veri toplayan zamanlanmış görevleri kapatır.",
+      "registry": [
+        { "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\DataCollection", "name": "AllowTelemetry", "type": "DWord", "value": 0, "original": "<sil>" },
+        { "path": "HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\DataCollection", "name": "AllowTelemetry", "type": "DWord", "value": 0, "original": "<sil>" },
+        { "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\DataCollection", "name": "DoNotShowFeedbackNotifications", "type": "DWord", "value": 1, "original": "<sil>" },
+        { "path": "HKCU:\\Software\\Microsoft\\Siuf\\Rules", "name": "NumberOfSIUFInPeriod", "type": "DWord", "value": 0, "original": "<sil>" }
+      ],
+      "services": [ { "name": "DiagTrack", "startup": "Disabled", "original": "Automatic" } ],
+      "tasks": [
+        "\\Microsoft\\Windows\\Customer Experience Improvement Program\\Consolidator",
+        "\\Microsoft\\Windows\\Customer Experience Improvement Program\\UsbCeip",
+        "\\Microsoft\\Windows\\Application Experience\\Microsoft Compatibility Appraiser",
+        "\\Microsoft\\Windows\\Application Experience\\ProgramDataUpdater",
+        "\\Microsoft\\Windows\\Feedback\\Siuf\\DmClient",
+        "\\Microsoft\\Windows\\Feedback\\Siuf\\DmClientOnScenarioDownload"
+      ]
+    },
+    {
+      "id": "reklamkimligi", "cat": "gizlilik", "risk": "dusuk", "preset": ["onerilen", "oyuncu"], "restart": "yok",
+      "name": "Reklam kimliğini kapat",
+      "desc": "Uygulamaların sana kişiselleştirilmiş reklam göstermek için kullandığı kimliği devre dışı bırakır.",
+      "registry": [
+        { "path": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\AdvertisingInfo", "name": "Enabled", "type": "DWord", "value": 0, "original": 1 },
+        { "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\AdvertisingInfo", "name": "DisabledByGroupPolicy", "type": "DWord", "value": 1, "original": "<sil>" }
+      ]
+    },
+    {
+      "id": "etkinlikgecmisi", "cat": "gizlilik", "risk": "dusuk", "preset": ["onerilen", "oyuncu"], "restart": "yok",
+      "name": "Etkinlik geçmişini kapat",
+      "desc": "Açtığın dosya ve uygulamaların geçmişinin tutulmasını ve Microsoft hesabına yüklenmesini engeller.",
+      "registry": [
+        { "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\System", "name": "EnableActivityFeed", "type": "DWord", "value": 0, "original": "<sil>" },
+        { "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\System", "name": "PublishUserActivities", "type": "DWord", "value": 0, "original": "<sil>" },
+        { "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\System", "name": "UploadUserActivities", "type": "DWord", "value": 0, "original": "<sil>" }
+      ]
+    },
+    {
+      "id": "oneriler", "cat": "gizlilik", "risk": "dusuk", "preset": ["onerilen", "oyuncu"], "restart": "yok",
+      "name": "Başlat menüsü reklamlarını ve önerileri kapat",
+      "desc": "Başlat menüsündeki önerilen uygulamaları, kilit ekranı reklamlarını ve sessizce kurulan uygulamaları (Candy Crush vb.) engeller.",
+      "registry": [
+        { "path": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager", "name": "SilentInstalledAppsEnabled", "type": "DWord", "value": 0, "original": 1 },
+        { "path": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager", "name": "SystemPaneSuggestionsEnabled", "type": "DWord", "value": 0, "original": 1 },
+        { "path": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager", "name": "SoftLandingEnabled", "type": "DWord", "value": 0, "original": 1 },
+        { "path": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager", "name": "SubscribedContent-338388Enabled", "type": "DWord", "value": 0, "original": 1 },
+        { "path": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager", "name": "SubscribedContent-338389Enabled", "type": "DWord", "value": 0, "original": 1 },
+        { "path": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager", "name": "SubscribedContent-353694Enabled", "type": "DWord", "value": 0, "original": 1 },
+        { "path": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager", "name": "SubscribedContent-353696Enabled", "type": "DWord", "value": 0, "original": 1 },
+        { "path": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced", "name": "Start_IrisRecommendations", "type": "DWord", "value": 0, "original": 1 }
+      ]
+    },
+    {
+      "id": "bingarama", "cat": "gizlilik", "risk": "dusuk", "preset": ["onerilen", "oyuncu"], "restart": "explorer",
+      "name": "Başlat aramasından Bing'i kaldır",
+      "desc": "Başlat menüsünde arama yaptığında sonuçlar internete (Bing) gönderilmez, sadece bilgisayarında aranır. Arama da hızlanır.",
+      "registry": [
+        { "path": "HKCU:\\Software\\Policies\\Microsoft\\Windows\\Explorer", "name": "DisableSearchBoxSuggestions", "type": "DWord", "value": 1, "original": "<sil>" },
+        { "path": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Search", "name": "BingSearchEnabled", "type": "DWord", "value": 0, "original": "<sil>" }
+      ]
+    },
+    {
+      "id": "copilot", "cat": "gizlilik", "risk": "dusuk", "preset": ["onerilen", "oyuncu"], "restart": "explorer",
+      "name": "Copilot ve Recall'ı kapat",
+      "desc": "Windows Copilot'u ve ekranının düzenli olarak görüntüsünü alıp arşivleyen Recall özelliğini devre dışı bırakır.",
+      "registry": [
+        { "path": "HKCU:\\Software\\Policies\\Microsoft\\Windows\\WindowsCopilot", "name": "TurnOffWindowsCopilot", "type": "DWord", "value": 1, "original": "<sil>" },
+        { "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsCopilot", "name": "TurnOffWindowsCopilot", "type": "DWord", "value": 1, "original": "<sil>" },
+        { "path": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced", "name": "ShowCopilotButton", "type": "DWord", "value": 0, "original": "<sil>" },
+        { "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsAI", "name": "DisableAIDataAnalysis", "type": "DWord", "value": 1, "original": "<sil>" },
+        { "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsAI", "name": "AllowRecallEnablement", "type": "DWord", "value": 0, "original": "<sil>" }
+      ]
+    },
+    {
+      "id": "konum", "cat": "gizlilik", "risk": "orta", "preset": [], "restart": "yok",
+      "name": "Konum erişimini kapat",
+      "desc": "Uygulamaların konumuna erişmesini sistem genelinde engeller. Hava durumu ve harita uygulamaları konumunu bulamaz.",
+      "registry": [
+        { "path": "HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\CapabilityAccessManager\\ConsentStore\\location", "name": "Value", "type": "String", "value": "Deny", "original": "Allow" }
+      ]
+    },
+
+    {
+      "id": "arkaplanuygulama", "cat": "performans", "risk": "dusuk", "preset": ["onerilen", "oyuncu"], "restart": "yok",
+      "name": "Arka plan uygulamalarını kapat",
+      "desc": "Microsoft Store uygulamalarının sen kullanmazken arka planda çalışıp RAM ve CPU harcamasını engeller. Normal masaüstü programlarını etkilemez.",
+      "registry": [
+        { "path": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\BackgroundAccessApplications", "name": "GlobalUserDisabled", "type": "DWord", "value": 1, "original": 0 },
+        { "path": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Search", "name": "BackgroundAppGlobalToggle", "type": "DWord", "value": 0, "original": 1 }
+      ]
+    },
+    {
+      "id": "edgearkaplan", "cat": "performans", "risk": "dusuk", "preset": ["onerilen", "oyuncu"], "restart": "yok",
+      "name": "Edge'in arka planda çalışmasını engelle",
+      "desc": "Edge'i hiç açmasan bile açılışta başlatan 'Başlangıç hızlandırma' ve arka plan modunu kapatır. Edge kullanmaya devam edebilirsin.",
+      "registry": [
+        { "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Edge", "name": "StartupBoostEnabled", "type": "DWord", "value": 0, "original": "<sil>" },
+        { "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Edge", "name": "BackgroundModeEnabled", "type": "DWord", "value": 0, "original": "<sil>" }
+      ]
+    },
+    {
+      "id": "menugecikme", "cat": "performans", "risk": "dusuk", "preset": ["onerilen", "oyuncu"], "restart": "oturum",
+      "name": "Menü açılma gecikmesini azalt",
+      "desc": "Sağ tık alt menülerinin açılmadan önce beklediği süreyi 400 ms'den 50 ms'ye indirir. Arayüz daha çevik hissettirir.",
+      "registry": [
+        { "path": "HKCU:\\Control Panel\\Desktop", "name": "MenuShowDelay", "type": "String", "value": "50", "original": "400" }
+      ]
+    },
+    {
+      "id": "gorselefekt", "cat": "performans", "risk": "dusuk", "preset": [], "restart": "oturum",
+      "name": "Görsel efektleri performans için ayarla",
+      "desc": "Pencere animasyonlarını, gölgeleri ve saydam seçimi kapatır; yazı tipi yumuşatma ve küçük resimler açık kalır. Zayıf sistemlerde fark edilir.",
+      "registry": [
+        { "path": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\VisualEffects", "name": "VisualFXSetting", "type": "DWord", "value": 3, "original": 0 },
+        { "path": "HKCU:\\Control Panel\\Desktop", "name": "UserPreferencesMask", "type": "Binary", "value": "90,12,03,80,10,00,00,00", "original": "9E,1E,07,80,12,00,00,00" },
+        { "path": "HKCU:\\Control Panel\\Desktop", "name": "FontSmoothing", "type": "String", "value": "2", "original": "2" },
+        { "path": "HKCU:\\Control Panel\\Desktop\\WindowMetrics", "name": "MinAnimate", "type": "String", "value": "0", "original": "1" },
+        { "path": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced", "name": "TaskbarAnimations", "type": "DWord", "value": 0, "original": 1 },
+        { "path": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced", "name": "ListviewAlphaSelect", "type": "DWord", "value": 0, "original": 1 },
+        { "path": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced", "name": "ListviewShadow", "type": "DWord", "value": 0, "original": 1 },
+        { "path": "HKCU:\\Software\\Microsoft\\Windows\\DWM", "name": "EnableAeroPeek", "type": "DWord", "value": 0, "original": 1 }
+      ]
+    },
+    {
+      "id": "hizlibaslat", "cat": "performans", "risk": "dusuk", "preset": ["onerilen"], "restart": "yok",
+      "name": "Hızlı başlatmayı kapat",
+      "desc": "Hızlı başlatma açıkken 'Kapat' aslında yarı uykudur; bilgisayar haftalarca gerçekten sıfırlanmaz ve yavaşlar. Kapatınca her kapatma temiz olur. Açılış 1-2 sn uzayabilir.",
+      "registry": [
+        { "path": "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power", "name": "HiberbootEnabled", "type": "DWord", "value": 0, "original": 1 }
+      ]
+    },
+    {
+      "id": "nihaiperformans", "cat": "performans", "risk": "orta", "preset": ["oyuncu"], "restart": "yok",
+      "name": "Nihai Performans güç planı",
+      "desc": "Windows'un gizli 'Ultimate Performance' planını ekleyip etkinleştirir. İşlemci boşta daha az güç tasarrufu yapar. Dizüstünde pil daha hızlı biter.",
+      "check": "(powercfg /getactivescheme) -match 'Henox'",
+      "script": [
+        "$out = powercfg -duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61",
+        "$guid = [regex]::Match(($out | Out-String), '[0-9a-fA-F-]{36}').Value",
+        "if (-not $guid) { throw 'Güç planı oluşturulamadı' }",
+        "powercfg -changename $guid 'Henox Nihai Performans' | Out-Null",
+        "powercfg -setactive $guid"
+      ],
+      "undo": [
+        "powercfg -setactive 381b4222-f694-41f0-9685-ff5bb260df2e",
+        "powercfg /list | Select-String 'Henox' | ForEach-Object { $g = [regex]::Match($_.Line, '[0-9a-fA-F-]{36}').Value; if ($g) { powercfg -delete $g } }"
+      ]
+    },
+    {
+      "id": "hazirda", "cat": "performans", "risk": "orta", "preset": [], "restart": "yok",
+      "name": "Hazırda bekletmeyi kapat (disk açar)",
+      "desc": "hiberfil.sys dosyasını siler; RAM boyutun kadar (genelde 6-16 GB) disk alanı açılır. Hazırda bekletme ve hızlı başlatma kullanılamaz olur. Uyku modu çalışmaya devam eder.",
+      "check": "-not (Test-Path \"$env:SystemDrive\\hiberfil.sys\")",
+      "script": [ "powercfg /hibernate off" ],
+      "undo": [ "powercfg /hibernate on" ]
+    },
+    {
+      "id": "sysmain", "cat": "performans", "risk": "orta", "preset": [], "restart": "yok",
+      "name": "SysMain (Superfetch) servisini kapat",
+      "desc": "Sık kullandığın programları önceden RAM'e yükleyen servis. SSD'de etkisi küçüktür; HDD kullanan ve diski sürekli %100 olan sistemlerde işe yarar.",
+      "services": [ { "name": "SysMain", "startup": "Disabled", "original": "Automatic" } ]
+    },
+    {
+      "id": "aramaindeks", "cat": "performans", "risk": "orta", "preset": [], "restart": "yok",
+      "name": "Windows Arama dizinlemesini kapat",
+      "desc": "Arka planda sürekli dosyalarını tarayan dizinleme servisini kapatır. Disk yükü azalır ama Başlat ve Gezgin'de dosya araması yavaşlar.",
+      "services": [ { "name": "WSearch", "startup": "Disabled", "original": "AutomaticDelayedStart" } ]
+    },
+    {
+      "id": "yazici", "cat": "performans", "risk": "orta", "preset": [], "restart": "yok",
+      "name": "Yazıcı servisini kapat",
+      "desc": "Yazıcı kullanmıyorsan Print Spooler servisini kapatır. Biraz RAM kazandırır ve PrintNightmare benzeri açıklara karşı korur. Yazıcı/PDF'e yazdırma çalışmaz.",
+      "services": [ { "name": "Spooler", "startup": "Disabled", "original": "Automatic" } ]
+    },
+
+    {
+      "id": "oyunmodu", "cat": "oyun", "risk": "dusuk", "preset": ["oyuncu"], "restart": "yok",
+      "name": "Oyun Modunu aç",
+      "desc": "Oyun açıkken Windows Update'in sürücü kurmasını ve bildirim göstermesini engeller, kaynakları oyuna öncelik verir.",
+      "registry": [
+        { "path": "HKCU:\\Software\\Microsoft\\GameBar", "name": "AutoGameModeEnabled", "type": "DWord", "value": 1, "original": "<sil>" },
+        { "path": "HKCU:\\Software\\Microsoft\\GameBar", "name": "AllowAutoGameMode", "type": "DWord", "value": 1, "original": "<sil>" }
+      ]
+    },
+    {
+      "id": "gamedvr", "cat": "oyun", "risk": "dusuk", "preset": ["oyuncu"], "restart": "yok",
+      "name": "Xbox arka plan kaydını (Game DVR) kapat",
+      "desc": "Oyun oynarken sürekli arka planda video kaydı tutan özelliği kapatır. Xbox Game Bar ile klip alamazsın; OBS, ShadowPlay, Medal çalışmaya devam eder.",
+      "registry": [
+        { "path": "HKCU:\\System\\GameConfigStore", "name": "GameDVR_Enabled", "type": "DWord", "value": 0, "original": 1 },
+        { "path": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\GameDVR", "name": "AppCaptureEnabled", "type": "DWord", "value": 0, "original": 1 },
+        { "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\GameDVR", "name": "AllowGameDVR", "type": "DWord", "value": 0, "original": "<sil>" }
+      ]
+    },
+    {
+      "id": "hags", "cat": "oyun", "risk": "orta", "preset": ["oyuncu"], "restart": "pc",
+      "name": "Donanım hızlandırmalı GPU zamanlamasını aç",
+      "desc": "GTX 1000 ve üzeri / RX 5000 ve üzeri kartlarda GPU belleğini sürücünün yönetmesini sağlar, DLSS 3 Frame Generation için gereklidir. Bazı eski oyunlarda takılma yaparsa geri al.",
+      "registry": [
+        { "path": "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers", "name": "HwSchMode", "type": "DWord", "value": 2, "original": 1 }
+      ]
+    },
+    {
+      "id": "fareivme", "cat": "oyun", "risk": "dusuk", "preset": ["oyuncu"], "restart": "oturum",
+      "name": "Fare ivmesini kapat",
+      "desc": "'İşaretçi hassasiyetini artır' seçeneğini kapatır. Fareyi aynı mesafe kaydırınca imleç hep aynı mesafe gider; FPS oyunlarında nişan tutarlı olur.",
+      "registry": [
+        { "path": "HKCU:\\Control Panel\\Mouse", "name": "MouseSpeed", "type": "String", "value": "0", "original": "1" },
+        { "path": "HKCU:\\Control Panel\\Mouse", "name": "MouseThreshold1", "type": "String", "value": "0", "original": "6" },
+        { "path": "HKCU:\\Control Panel\\Mouse", "name": "MouseThreshold2", "type": "String", "value": "0", "original": "10" }
+      ]
+    },
+    {
+      "id": "yapiskantus", "cat": "oyun", "risk": "dusuk", "preset": ["oyuncu"], "restart": "yok",
+      "name": "Yapışkan tuşlar uyarısını kapat",
+      "desc": "Oyunda Shift'e 5 kez basınca açılıp oyunu alta atan 'Yapışkan Tuşlar' penceresini kapatır.",
+      "registry": [
+        { "path": "HKCU:\\Control Panel\\Accessibility\\StickyKeys", "name": "Flags", "type": "String", "value": "506", "original": "510" },
+        { "path": "HKCU:\\Control Panel\\Accessibility\\Keyboard Response", "name": "Flags", "type": "String", "value": "122", "original": "126" },
+        { "path": "HKCU:\\Control Panel\\Accessibility\\ToggleKeys", "name": "Flags", "type": "String", "value": "58", "original": "62" }
+      ]
+    },
+    {
+      "id": "multimedya", "cat": "oyun", "risk": "dusuk", "preset": ["oyuncu"], "restart": "pc",
+      "name": "Multimedya zamanlayıcısını oyunlara öncelikle",
+      "desc": "Windows'un arka plan işlerine ayırdığı CPU payını %20'den %10'a indirir ve oyun görevlerine 'Yüksek' öncelik verir. Etkisi küçüktür ama zararsızdır.",
+      "registry": [
+        { "path": "HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile", "name": "SystemResponsiveness", "type": "DWord", "value": 10, "original": 20 },
+        { "path": "HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games", "name": "GPU Priority", "type": "DWord", "value": 8, "original": 8 },
+        { "path": "HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games", "name": "Priority", "type": "DWord", "value": 6, "original": 2 },
+        { "path": "HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games", "name": "Scheduling Category", "type": "String", "value": "High", "original": "Medium" }
+      ]
+    },
+
+    {
+      "id": "uzantilar", "cat": "arayuz", "risk": "dusuk", "preset": ["onerilen", "oyuncu"], "restart": "explorer",
+      "name": "Dosya uzantılarını göster",
+      "desc": "'fatura.pdf.exe' gibi sahte dosyaları ayırt edebilmen için dosya uzantılarını her zaman gösterir. Güvenlik için önerilir.",
+      "registry": [
+        { "path": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced", "name": "HideFileExt", "type": "DWord", "value": 0, "original": 1 }
+      ]
+    },
+    {
+      "id": "gizlidosya", "cat": "arayuz", "risk": "dusuk", "preset": [], "restart": "explorer",
+      "name": "Gizli dosyaları göster",
+      "desc": "AppData gibi gizli klasörleri Dosya Gezgini'nde görünür yapar. Korunan sistem dosyaları gizli kalmaya devam eder.",
+      "registry": [
+        { "path": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced", "name": "Hidden", "type": "DWord", "value": 1, "original": 2 }
+      ]
+    },
+    {
+      "id": "klasiksagtik", "cat": "arayuz", "risk": "dusuk", "preset": [], "restart": "explorer",
+      "name": "Klasik sağ tık menüsü (Windows 11)",
+      "desc": "Her seferinde 'Daha fazla seçenek göster'e tıklamak yerine Windows 10'daki tam sağ tık menüsünü direkt açar.",
+      "check": "Test-Path 'HKCU:\\Software\\Classes\\CLSID\\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\\InprocServer32'",
+      "script": [
+        "New-Item -Path 'HKCU:\\Software\\Classes\\CLSID\\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\\InprocServer32' -Force | Out-Null",
+        "Set-ItemProperty -Path 'HKCU:\\Software\\Classes\\CLSID\\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\\InprocServer32' -Name '(Default)' -Value ''"
+      ],
+      "undo": [
+        "Remove-Item -Path 'HKCU:\\Software\\Classes\\CLSID\\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}' -Recurse -Force -ErrorAction SilentlyContinue"
+      ]
+    },
+    {
+      "id": "koyutema", "cat": "arayuz", "risk": "dusuk", "preset": [], "restart": "yok",
+      "name": "Koyu tema",
+      "desc": "Windows ve uygulamalar için koyu modu açar.",
+      "registry": [
+        { "path": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize", "name": "AppsUseLightTheme", "type": "DWord", "value": 0, "original": 1 },
+        { "path": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize", "name": "SystemUsesLightTheme", "type": "DWord", "value": 0, "original": 1 }
+      ]
+    },
+    {
+      "id": "gorevsol", "cat": "arayuz", "risk": "dusuk", "preset": [], "restart": "yok",
+      "name": "Görev çubuğunu sola hizala",
+      "desc": "Windows 11'de ortada duran Başlat düğmesini ve simgeleri Windows 10'daki gibi sola alır.",
+      "registry": [
+        { "path": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced", "name": "TaskbarAl", "type": "DWord", "value": 0, "original": 1 }
+      ]
+    },
+    {
+      "id": "widget", "cat": "arayuz", "risk": "dusuk", "preset": ["onerilen", "oyuncu"], "restart": "explorer",
+      "name": "Pencere öğelerini (haber/hava durumu) kapat",
+      "desc": "Görev çubuğunun solundaki haber ve hava durumu panelini kaldırır. Arka planda çalışan WebView işlemleri de kapanır.",
+      "registry": [
+        { "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Dsh", "name": "AllowNewsAndInterests", "type": "DWord", "value": 0, "original": "<sil>" }
+      ]
+    },
+    {
+      "id": "gorevsonlandir", "cat": "arayuz", "risk": "dusuk", "preset": ["onerilen", "oyuncu"], "restart": "yok",
+      "name": "Görev çubuğuna 'Görevi sonlandır' ekle",
+      "desc": "Donan bir programın görev çubuğu simgesine sağ tıklayınca Görev Yöneticisi'ni açmadan kapatabilirsin.",
+      "registry": [
+        { "path": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\TaskbarDeveloperSettings", "name": "TaskbarEndTask", "type": "DWord", "value": 1, "original": "<sil>" }
+      ]
+    },
+    {
+      "id": "numlock", "cat": "arayuz", "risk": "dusuk", "preset": [], "restart": "pc",
+      "name": "Açılışta Num Lock açık olsun",
+      "desc": "Giriş ekranında PIN yazarken sayı tuşlarının çalışması için Num Lock'u açık başlatır.",
+      "registry": [
+        { "path": "HKU:\\.DEFAULT\\Control Panel\\Keyboard", "name": "InitialKeyboardIndicators", "type": "String", "value": "2", "original": "2147483648" }
+      ]
+    },
+    {
+      "id": "bubilgisayar", "cat": "arayuz", "risk": "dusuk", "preset": [], "restart": "explorer",
+      "name": "Dosya Gezgini 'Bu Bilgisayar' ile açılsın",
+      "desc": "Gezgin'i açınca 'Giriş' sayfası yerine sürücülerin olduğu 'Bu Bilgisayar' açılır.",
+      "registry": [
+        { "path": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced", "name": "LaunchTo", "type": "DWord", "value": 1, "original": 2 }
+      ]
+    },
+
+    {
+      "id": "otomatikyenidenbaslatma", "cat": "guncelleme", "risk": "dusuk", "preset": ["onerilen", "oyuncu"], "restart": "yok",
+      "name": "Güncelleme sonrası zorla yeniden başlatmayı engelle",
+      "desc": "Sen bilgisayarın başındayken Windows Update'in kendi kendine yeniden başlatmasını engeller. Güncellemeler yine iner, sen yeniden başlatınca kurulur.",
+      "registry": [
+        { "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\\AU", "name": "NoAutoRebootWithLoggedOnUsers", "type": "DWord", "value": 1, "original": "<sil>" }
+      ]
+    },
+    {
+      "id": "suruculerupdate", "cat": "guncelleme", "risk": "orta", "preset": [], "restart": "yok",
+      "name": "Windows Update'in sürücü kurmasını engelle",
+      "desc": "Windows Update'in NVIDIA/AMD sürücünü kendi eski sürümüyle değiştirmesini engeller. Sürücüleri kendin (NVIDIA App, AMD Adrenalin) güncellemelisin.",
+      "registry": [
+        { "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate", "name": "ExcludeWUDriversInQualityUpdate", "type": "DWord", "value": 1, "original": "<sil>" }
+      ]
+    },
+    {
+      "id": "ozellikerteleme", "cat": "guncelleme", "risk": "orta", "preset": [], "restart": "yok",
+      "name": "Büyük sürüm güncellemelerini 1 yıl ertele",
+      "desc": "24H2, 25H2 gibi büyük sürüm yükseltmelerini 365 gün erteler; ilk aylardaki hatalardan korunursun. Güvenlik güncellemeleri normal şekilde gelmeye devam eder.",
+      "registry": [
+        { "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate", "name": "DeferFeatureUpdates", "type": "DWord", "value": 1, "original": "<sil>" },
+        { "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate", "name": "DeferFeatureUpdatesPeriodInDays", "type": "DWord", "value": 365, "original": "<sil>" }
+      ]
+    },
+    {
+      "id": "teslimatopt", "cat": "guncelleme", "risk": "dusuk", "preset": ["onerilen", "oyuncu"], "restart": "yok",
+      "name": "Güncellemeleri başkalarıyla paylaşmayı kapat",
+      "desc": "Teslim İyileştirme'nin internetinden başka bilgisayarlara güncelleme yüklemesini engeller. Microsoft'tan indirme normal devam eder.",
+      "registry": [
+        { "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\DeliveryOptimization", "name": "DODownloadMode", "type": "DWord", "value": 0, "original": "<sil>" }
+      ]
+    },
+
+    {
+      "id": "ipv6tercih", "cat": "gelismis", "risk": "orta", "preset": [], "restart": "pc",
+      "name": "IPv4'ü IPv6'ya tercih et",
+      "desc": "IPv6'yı kapatmadan, bağlantılarda IPv4'ün öncelikli kullanılmasını sağlar. Bazı Türk ISS'lerinde IPv6 kaynaklı ping ve bağlantı sorunlarını çözer.",
+      "registry": [
+        { "path": "HKLM:\\SYSTEM\\CurrentControlSet\\Services\\Tcpip6\\Parameters", "name": "DisabledComponents", "type": "DWord", "value": 32, "original": "<sil>" }
+      ]
+    },
+    {
+      "id": "uzakmasaustu", "cat": "gelismis", "risk": "dusuk", "preset": [], "restart": "yok",
+      "name": "Uzak Masaüstü ve Uzak Yardım'ı kapat",
+      "desc": "Kullanmıyorsan bilgisayarına uzaktan bağlanılmasını engeller, saldırı yüzeyini daraltır. AnyDesk/TeamViewer'ı etkilemez.",
+      "registry": [
+        { "path": "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server", "name": "fDenyTSConnections", "type": "DWord", "value": 1, "original": 1 },
+        { "path": "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Remote Assistance", "name": "fAllowToGetHelp", "type": "DWord", "value": 0, "original": 1 }
+      ]
+    },
+    {
+      "id": "hataraporlama", "cat": "gelismis", "risk": "dusuk", "preset": [], "restart": "yok",
+      "name": "Windows Hata Raporlama'yı kapat",
+      "desc": "Windows Hata Raporlama'nın çökme dökümlerini Microsoft'a göndermesini ve diskte biriktirmesini kapatır.",
+      "registry": [
+        { "path": "HKLM:\\SOFTWARE\\Microsoft\\Windows\\Windows Error Reporting", "name": "Disabled", "type": "DWord", "value": 1, "original": "<sil>" }
+      ],
+      "services": [ { "name": "WerSvc", "startup": "Disabled", "original": "Manual" } ]
+    }
+  ]
+}

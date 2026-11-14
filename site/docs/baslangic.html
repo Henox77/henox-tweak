@@ -1,0 +1,26 @@
+<!--meta {"title":"Başlangıç ve Temizlik","slug":"/rehber/baslangic-ve-temizlik/","group":"Kullanım Rehberi","order":6,"desc":"Açılışta başlayan programları yönetme ve gereksiz dosyaları güvenle temizleme.","intro":"Bilgisayarın daha hızlı açılsın ve diskinde yer açılsın."} -->
+<h2>Başlangıç</h2>
+<p>Başlangıç sekmesi, bilgisayar açılınca kendiliğinden çalışan programları listeler. Bunlar kayıt defterindeki <code>Run</code> anahtarlarından ve Başlangıç klasörlerinden okunur.</p>
+<ul>
+  <li>Anahtar <strong>kapalıysa</strong> program açılışta başlamaz. Program silinmez; istediğinde elle açarsın.</li>
+  <li>Değişiklik <strong>anında</strong> uygulanır, ayrıca "uygula" düğmesine basmana gerek yok.</li>
+  <li>Görev Yöneticisi'nin "Başlangıç uygulamaları" sekmesiyle aynı yöntemi kullanır; orada yaptığın değişiklikler burada da görünür.</li>
+</ul>
+<div class="callout warn"><b class="t"><svg><use href="#i-tri"/></svg>Bunları açık bırak</b><p>Windows Güvenliği (SecurityHealth), ses sürücüsü (ör. RtkAudUService), dokunmatik yüzey ve klavye sürücüleri, Riot Vanguard gibi oyun hile korumaları. Ne olduğunu bilmediğin bir öğeyi kapatmadan önce adını internette arat.</p></div>
+
+<h2>Temizlik</h2>
+<p>Temizlik sekmesi açıldığında temizlenebilecek alanı otomatik olarak tarar. Her satırın yanında ne kadar yer kapladığı görünür; üstteki büyük sayı seçili alanların toplamıdır.</p>
+<table>
+  <thead><tr><th>Alan</th><th>Varsayılan</th><th>Not</th></tr></thead>
+  <tbody>
+    <tr><td>Kullanıcı geçici dosyaları (%TEMP%)</td><td>Seçili</td><td>Kullanımdaki dosyalar atlanır</td></tr>
+    <tr><td>Windows geçici dosyaları</td><td>Seçili</td><td></td></tr>
+    <tr><td>Windows Update indirme önbelleği</td><td>Seçili</td><td>Gerekirse yeniden indirilir</td></tr>
+    <tr><td>Teslim İyileştirme önbelleği</td><td>Seçili</td><td></td></tr>
+    <tr><td>Hata raporları ve çökme dökümleri</td><td>Seçili</td><td></td></tr>
+    <tr><td>Küçük resim önbelleği</td><td>Seçili</td><td>Klasör açılınca yeniden oluşur</td></tr>
+    <tr><td>DirectX / NVIDIA / AMD gölgelendirici önbelleği</td><td>Seçili değil</td><td>Sürücü güncellemesi sonrası takılma varsa temizle; oyunların ilk açılışı biraz uzar</td></tr>
+    <tr><td>Geri Dönüşüm Kutusu</td><td>Seçili değil</td><td>Geri alınamaz, ayrıca onay istenir</td></tr>
+  </tbody>
+</table>
+<p>Kişisel klasörlerine (Belgeler, Masaüstü, İndirilenler, Resimler) <strong>asla</strong> dokunulmaz. Script ayrıca sistem sürücüsünün kökü veya Windows klasörü gibi kritik yolları silmeyi reddeden bir güvenlik kontrolü içerir.</p>

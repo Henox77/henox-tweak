@@ -1,0 +1,11 @@
+{
+  "name": "henox-tweak",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Türkçe, açık kaynak Windows iyileştirme aracı",
+  "type": "module",
+  "scripts": {
+    "build": "node build.mjs"
+  },
+  "license": "MIT"
+}

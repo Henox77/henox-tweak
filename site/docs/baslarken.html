@@ -1,0 +1,30 @@
+<!--meta {"title":"Başlarken","slug":"/rehber/baslarken/","group":"Kullanım Rehberi","order":2,"desc":"Henox Tweak'i ilk kez çalıştırma: yönetici terminali, tek komut ve ilk adımlar.","intro":"İki dakikada Henox Tweak'i aç ve ilk tweaklerini uygula."} -->
+<h2>1. Terminali yönetici olarak aç</h2>
+<p>Başlat düğmesine <strong>sağ tıkla</strong> ve listeden <strong>Terminal (Yönetici)</strong> seçeneğini seç. Windows 10'da bu seçenek <strong>Windows PowerShell (Yönetici)</strong> olarak görünür. Kullanıcı Hesabı Denetimi penceresinde "Evet"e bas.</p>
+<div class="callout"><b class="t"><svg><use href="#i-info"/></svg>Yönetici olarak açmayı unutursan</b><p>Sorun değil. Henox Tweak bunu fark eder ve kendini yönetici olarak yeniden başlatmak için izin ister.</p></div>
+
+<h2>2. Komutu çalıştır</h2>
+<p>Aşağıdaki komutu kopyala, terminale yapıştır ve <code>Enter</code>'a bas:</p>
+<pre><code>irm tweak.henox.dev/run | iex</code></pre>
+<p>Bu komut iki parçadan oluşur: <code>irm</code> (Invoke-RestMethod) script'i indirir, <code>iex</code> (Invoke-Expression) çalıştırır. Hiçbir şey kurulmaz; pencereyi kapattığında araç da kapanır.</p>
+
+<h3>Komut çalıştırmak istemiyorsan</h3>
+<p><a href="/henox.ps1">henox.ps1</a> dosyasını indir, sağ tıkla → <strong>PowerShell ile çalıştır</strong>. Windows "bu dosya internetten geldi" uyarısı verebilir; bu, imzasız her script için standart bir uyarıdır.</p>
+
+<h2>3. İlk adımlar</h2>
+<ol>
+  <li><strong>Panel</strong> sekmesindeki önerileri oku. Örneğin "17 gündür yeniden başlatılmamış" diyorsa, ilk iş bilgisayarı yeniden başlat.</li>
+  <li><strong>Tweakler</strong> sekmesinde <strong>Önerilen</strong> düğmesine bas. Seçilen tweaklerin üzerine gelip ne yaptıklarını oku.</li>
+  <li><strong>Tweakleri çalıştır</strong>'a bas. Açılan onay penceresinde listeyi kontrol et ve <strong>Uygula</strong> de.</li>
+  <li>Bazı tweakler Dosya Gezgini'nin yenilenmesini veya yeniden başlatmayı gerektirir; Henox Tweak bunu sana söyler.</li>
+</ol>
+
+<h2>Oyuncuysan</h2>
+<p>"Önerilen" yerine <strong>Oyuncu</strong> seçimini kullan. Bu seçim Önerilen'e ek olarak Oyun Modu'nu açar, Game DVR'ı ve fare ivmesini kapatır, Nihai Performans güç planını etkinleştirir. Dizüstü bilgisayardaysan güç planının pil süresini kısaltacağını unutma.</p>
+
+<h2>Sonraki adımlar</h2>
+<ul>
+  <li><a href="/rehber/uygulamalar/">Uygulamalar</a>: formattan sonra ihtiyacın olan programları tek seferde kur.</li>
+  <li><a href="/rehber/tweakler/">Tweakler</a>: kategoriler, risk seviyeleri ve tercihler.</li>
+  <li><a href="/rehber/geri-alma/">Geri alma ve yedekler</a>: bir şey ters giderse ne yapmalı.</li>
+</ul>

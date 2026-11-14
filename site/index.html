@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="tr">
+<head>
+{{head}}
+</head>
+<body>
+{{header}}
+<main id="main">
+
+  <section class="hero">
+    <div class="dots"></div><div class="hero-glow"></div>
+    <div class="wrap">
+      <div class="hero-grid">
+        <div>
+          <span class="eyebrow rv"><i></i>Türkçe WinUtil alternatifi · Açık kaynak</span>
+          <h1 class="rv" data-d="1">Windows'u <em>tam istediğin gibi</em> kur</h1>
+          <p class="lead rv" data-d="2">WinUtil'i bilenler için kısaca: Türkçesi, üstüne biraz daha fazlası. Uygulamaları kur, tweakleri uygula, sorunları onar, gereksizleri sök. Tek komut, tek pencere, her adım geri alınabilir.</p>
+          <div class="ctas rv" data-d="3">
+            <a class="btn btn-pri" href="/rehber/baslarken/">Başla <svg class="arr"><use href="#i-arrow"/></svg></a>
+            <a class="btn" href="https://github.com/Henox77/henox-tweak" target="_blank" rel="noopener">GitHub'da gör <svg><use href="#i-ext"/></svg></a>
+          </div>
+          <div class="cmd-chip rv" data-d="4">
+            <span><span class="p">PS&gt; </span><span class="k">irm</span> tweak.henox.dev/run | <span class="k">iex</span></span>
+            <button class="copy-btn" data-copy="irm tweak.henox.dev/run | iex"><svg><use href="#i-copy"/></svg><span>Kopyala</span></button>
+          </div>
+          <p class="micro rv" data-d="5">Ücretsiz. Açık kaynak. Kurulum yok, telemetri yok, reklam yok.</p>
+        </div>
+        <div class="rv" data-d="2">
+          <div class="shot">
+            <div class="shot-bar">henox.ps1<span class="ctl"><svg><use href="#i-min"/></svg><svg><use href="#i-max"/></svg><svg><use href="#i-x"/></svg></span></div>
+            <div class="split" title="Koyu ve açık temayı karşılaştırmak için fareyi gezdir">
+              <img src="/img/tweaks.png" width="1280" height="820" alt="Henox Tweak koyu tema, Tweakler sekmesi">
+              <img class="light" src="/img/tweaks-light.png" width="1280" height="820" alt="" aria-hidden="true">
+              <span class="split-hint">koyu ↔ açık</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="badges rv">
+        <a class="badge blue" href="https://github.com/Henox77/henox-tweak" target="_blank" rel="noopener"><span>Sürüm</span><b>v{{version}}</b></a>
+        <a class="badge green" href="https://github.com/Henox77/henox-tweak/blob/main/LICENSE" target="_blank" rel="noopener"><span>Lisans</span><b>MIT</b></a>
+        <span class="badge purple"><span>Dil</span><b>Türkçe</b></span>
+        <span class="badge gray"><span>Windows</span><b>10 · 11</b></span>
+      </div>
+    </div>
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        {{marquee}}{{marquee}}
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <div class="stats">
+      <div class="stat rv"><b data-count="{{tweaks}}">{{tweaks}}</b><span>Belgelenmiş tweak</span></div>
+      <div class="stat rv" data-d="1"><b data-count="{{apps}}">{{apps}}</b><span>Tek tıkla uygulama</span></div>
+      <div class="stat rv" data-d="2"><b data-count="{{debloat}}">{{debloat}}</b><span>Debloat seçeneği</span></div>
+      <div class="stat rv" data-d="3"><b data-count="0">0</b><span>Reklam ve telemetri</span></div>
+    </div>
+  </div>
+
+  <section class="sec sec-alt">
+    <div class="wrap pain">
+      <div class="sec-head rv">
+        <h2>Windows'u kurmak kolay, ayarlamak zahmetli</h2>
+        <p class="sub">Format sonrası Windows çalışır. Ama istediğin hale getirmek; kayıt defteri, forum konuları ve unutulan adımlarla dolu bir öğleden sonra demek.</p>
+      </div>
+      <ul>
+        <li class="rv"><svg><use href="#i-tri"/></svg>Temel programlar için bir düzine ayrı kurulum dosyası, her birinde reddetmen gereken ek yazılım teklifleri.</li>
+        <li class="rv" data-d="1"><svg><use href="#i-tri"/></svg>Gizlilik ve telemetri ayarları yarım düzine farklı Ayarlar sayfasına dağılmış durumda.</li>
+        <li class="rv" data-d="2"><svg><use href="#i-tri"/></svg>Uygulamaya değer tweakler yıllanmış forum konularında, eskimiş ve riskli tavsiyelerin arasında kaybolmuş.</li>
+        <li class="rv" data-d="3"><svg><use href="#i-tri"/></svg>Bir tweak'i geri almak, tam olarak neyi nasıl değiştirdiğini hatırlamayı gerektiriyor.</li>
+        <li class="rv" data-d="4"><svg><use href="#i-tri"/></svg>Sonraki bilgisayarda her şeye sıfırdan başlamak gerekiyor.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="sec" id="ozellikler">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <h2>WinUtil'in sevdiğin her şeyi, Türkçe ve fazlasıyla</h2>
+        <p class="sub">Aynı tanıdık mantık: uygulama kur, tweak uygula, onar. Üstüne Türkçe açıklamalar, sana özel öneriler, gerçek yedekten geri alma, başlangıç yöneticisi ve akıllı temizlik.</p>
+      </div>
+      <div class="cards">
+        <div class="card rv"><div class="ic"><svg><use href="#i-pkg"/></svg></div><h3>Şişkinlik olmadan kur</h3><p>{{apps}} popüler program, resmi winget deposundan, ek yazılım teklifi olmadan, sessizce ve tek seferde.</p></div>
+        <div class="card rv" data-d="1"><div class="ic"><svg><use href="#i-sliders"/></svg></div><h3>Onay kutusuyla tweak</h3><p>Gizlilik, performans, oyun ve arayüz ayarları; ne yaptıklarına göre gruplanmış, her biri Türkçe açıklamalı.</p></div>
+        <div class="card rv" data-d="2"><div class="ic"><svg><use href="#i-undo"/></svg></div><h3>Beğenmediğini geri al</h3><p>Her tweak uygulanmadan önce orijinal değeri yedeklenir. Aynı ekrandan tek tek ya da toptan geri alırsın.</p></div>
+        <div class="card rv"><div class="ic"><svg><use href="#i-wrench"/></svg></div><h3>Bozulanı onar</h3><p>SFC, DISM, Windows Update ve ağ sıfırlama tek tıkla. İnsanların forumdan kopyaladığı komutlar artık düğme.</p></div>
+        <div class="card rv" data-d="1"><div class="ic"><svg><use href="#i-trash"/></svg></div><h3>Gereksizleri sök</h3><p>Candy Crush, Clipchamp, Cortana, Bing Haberler... Hangisinin güvenle kaldırılabileceği yanında yazar.</p></div>
+        <div class="card rv" data-d="2"><div class="ic"><svg><use href="#i-monitor"/></svg></div><h3>Sistemini tanı</h3><p>Donanımını okur, RAM ve disk durumunu ölçer ve sana özel, dürüst öneriler verir. Mucize vaadi yok.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec sec-alt">
+    <div class="wrap sticky-sec">
+      <div class="sticky-left rv">
+        <h2>Bir bilgisayarı bir kez kurmak için gereken her şey</h2>
+        <p class="sub">Format attıktan sonraki ilk saatini geri ver.</p>
+        <div class="counter"><b>01</b> / 06 <span class="bar"><i></i></span></div>
+      </div>
+      <div class="stack">
+        <div class="item"><div class="ic"><svg><use href="#i-lock"/></svg></div><div><h3>Hiçbir şey eve telefon etmez</h3><p>Henox Tweak hiçbir veri toplamaz ve göndermez. Seçtiğin değişiklikleri yapan, sonra kapanan bir script.</p></div></div>
+        <div class="item"><div class="ic"><svg><use href="#i-undo"/></svg></div><div><h3>Varsayılan olarak geri alınabilir</h3><p>Orijinal değerler <code>%ProgramData%\HenoxTweak</code> klasörüne yazılır. İstersen her işlemden önce geri yükleme noktası oluşturur.</p></div></div>
+        <div class="item"><div class="ic"><svg><use href="#i-layers"/></svg></div><div><h3>Hazır seçimler</h3><p>"Önerilen" ve "Oyuncu" seçimleri, her tweak'i tek tek incelemek yerine mantıklı bir başlangıç noktası verir.</p></div></div>
+        <div class="item"><div class="ic"><svg><use href="#i-file"/></svg></div><div><h3>Otomasyona hazır</h3><p>Seçimini JSON olarak kaydet; sonraki bilgisayarda tek komutla <code>-Config</code> ve <code>-Run</code> ile uygula.</p></div></div>
+        <div class="item"><div class="ic"><svg><use href="#i-eye"/></svg></div><div><h3>Uygulamadan önce incele</h3><p>Her tweak'in üzerine gelince kayıt defterinde neyi değiştirdiğini görürsün. Tweak Gezgini'nde hepsi açıkça listeli.</p></div></div>
+        <div class="item"><div class="ic"><svg><use href="#i-globe"/></svg></div><div><h3>Tamamen Türkçe</h3><p>Arayüz, açıklamalar, uyarılar ve dokümantasyon. "Bu ne işe yarıyor?" diye çeviri yapmak yok.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="arayuz">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <h2>Komut satırı bilmen gerekmiyor</h2>
+        <p class="sub">Animasyonlu, açık ve koyu temalı, sade bir arayüz. Ne yaptığını anlatır, riskli olanı işaretler, bitince ne olduğunu söyler.</p>
+      </div>
+      <div class="gallery rv">
+        <div class="tabs" role="tablist">
+          <button class="tab" role="tab" aria-selected="true" data-img="panel" data-cap="Panel: donanımını okur, RAM ve disk durumunu ölçer, sana özel öneriler verir.">Panel</button>
+          <button class="tab" role="tab" aria-selected="false" data-img="tweaks" data-cap="Tweakler: solda onay kutulu tweakler, sağda anında uygulanan tercihler ve DNS değiştirici.">Tweakler</button>
+          <button class="tab" role="tab" aria-selected="false" data-img="apps" data-cap="Uygulamalar: kategorilere ayrılmış 70+ program. Kurulu olanlar otomatik işaretlenir.">Uygulamalar</button>
+          <button class="tab" role="tab" aria-selected="false" data-img="debloat" data-cap="Debloat: önceden yüklü uygulamalar. Bilgisayarında olmayanlar soluk görünür.">Debloat</button>
+          <button class="tab" role="tab" aria-selected="false" data-img="clean" data-cap="Temizlik: önce tarar, ne kadar yer açılacağını gösterir. Kişisel dosyalara asla dokunmaz.">Temizlik</button>
+          <button class="tab" role="tab" aria-selected="false" data-img="repair" data-cap="Onarım: SFC, DISM, Windows Update onarımı, ağ sıfırlama ve Windows araçlarına kısayollar.">Onarım</button>
+          <button class="tab" role="tab" aria-selected="false" data-img="panel-light" data-cap="Açık tema: tek tıkla geçiş, Windows temanı otomatik algılar.">Açık tema</button>
+        </div>
+        <div class="frame"><img src="/img/panel.png" width="1280" height="820" alt="Henox Tweak Panel ekranı" loading="lazy"></div>
+        <p class="cap"></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec sec-alt" id="baslarken">
+    <div class="wrap">
+      <div class="sec-head rv"><h2>Üç adımda başla</h2><p class="sub">Kurulum dosyası yok. İndirme yok. Bir komut.</p></div>
+      <div class="steps">
+        <div class="step rv"><div class="n">1</div><div><h3>PowerShell'i yönetici olarak aç</h3><p>Başlat düğmesine sağ tıkla → <kbd>Terminal (Yönetici)</kbd> veya <kbd>Windows PowerShell (Yönetici)</kbd>.</p></div></div>
+        <div class="step rv" data-d="1"><div class="n">2</div><div><h3>Komutu yapıştır ve çalıştır</h3>
+          <div class="term"><div class="term-bar"><i></i><i></i><i></i><span>Terminal (Yönetici)</span></div>
+            <div class="term-body"><code><span class="p">PS&gt; </span><span class="k">irm</span> <span class="s">tweak.henox.dev/run</span> | <span class="k">iex</span></code><button class="copy-btn" data-copy="irm tweak.henox.dev/run | iex"><svg><use href="#i-copy"/></svg><span>Kopyala</span></button></div>
+          </div></div></div>
+        <div class="step rv" data-d="2"><div class="n">3</div><div><h3>Kur, tweak'le, onar, temizle</h3><p>Açılan pencereden istediğini seç. Bitince her şeyi tek tıkla geri alabileceğini bilerek.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="guvenlik">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <h2>"Virüs var mı?" sorusunun cevabı: kendin bak</h2>
+        <p class="sub">İnternetten indirilen tweak araçlarına şüpheyle yaklaşmakta haklısın. O yüzden Henox Tweak'te gizli hiçbir şey yok.</p>
+      </div>
+      <div class="trust">
+        <ul class="checks rv">
+          <li><svg><use href="#i-checkc"/></svg><div><b>Tek dosya, okunabilir kaynak kod</b><span>EXE yok, şifreli veya karıştırılmış kod yok. Çalışan şey GitHub'daki kodun aynısı.</span></div></li>
+          <li><svg><use href="#i-checkc"/></svg><div><b>Defender, Güvenlik Duvarı ve UAC'ye asla dokunmaz</b><span>"FPS için antivirüsü kapat" diyenlerden uzak dur. Biz bunu bilerek yapmıyoruz.</span></div></li>
+          <li><svg><use href="#i-checkc"/></svg><div><b>Hiçbir veri göndermez</b><span>İnternete yalnızca sen uygulama kurarken winget çıkar. Analitik yok, takip yok.</span></div></li>
+          <li><svg><use href="#i-checkc"/></svg><div><b>Dürüst açıklamalar</b><span>Etkisi küçük olan tweak'e "küçük" yazar, riskli olanı işaretler. "+%40 FPS" vaadi yok.</span></div></li>
+        </ul>
+        <div class="panel rv" data-d="1">
+          <h3>Çalıştırmadan önce incele</h3>
+          <p>Script'i indirip Not Defteri'nde oku, parmak izini karşılaştır:</p>
+          <div class="code"><span class="c"># indir ve aç</span>
+irm tweak.henox.dev/run -OutFile henox.ps1
+notepad henox.ps1
+
+<span class="c"># parmak izini kontrol et</span>
+Get-FileHash henox.ps1</div>
+          <div class="hash">v{{version}} · SHA256<br><b id="sha">{{sha256}}</b></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta sec-alt">
+    <div class="wrap">
+      <h2 class="rv">Windows'u bir kez, doğru şekilde kur</h2>
+      <div class="ctas rv" data-d="1">
+        <a class="btn btn-pri" href="/rehber/baslarken/">Başla <svg class="arr"><use href="#i-arrow"/></svg></a>
+        <a class="btn" href="https://github.com/Henox77/henox-tweak" target="_blank" rel="noopener">GitHub'da gör <svg><use href="#i-ext"/></svg></a>
+      </div>
+      <p class="micro rv" data-d="2">Ücretsiz ve açık kaynak. Kurulum yok, telemetri yok, hesap gerekmez.</p>
+    </div>
+  </section>
+</main>
+{{footer}}
+</body>
+</html>
