@@ -43,7 +43,7 @@ try { [Console]::OutputEncoding = [Text.Encoding]::UTF8 } catch {}
 $OutputEncoding = [Text.Encoding]::UTF8
 try { $Host.UI.RawUI.WindowTitle = "Henox Tweak $HT_VERSION" } catch {}
 Write-Host ''
-Write-Host '  henox' -NoNewline; Write-Host '/tweak ' -ForegroundColor Blue -NoNewline; Write-Host "v$HT_VERSION  açılıyor... (bu pencereyi kapatma, uygulama da kapanır)" -ForegroundColor DarkGray
+Write-Host '  henox' -NoNewline; Write-Host '/tweak ' -ForegroundColor Magenta -NoNewline; Write-Host "v$HT_VERSION  açılıyor... (bu pencereyi kapatma, uygulama da kapanır)" -ForegroundColor DarkGray
 Write-Host ''
 
 Add-Type -AssemblyName PresentationFramework, PresentationCore, WindowsBase
@@ -129,11 +129,11 @@ $xaml.SelectNodes('//*[@*[local-name()="Name"]]') | ForEach-Object {
 # ─────────────────────────────────────────────────────────────── Tema
 $Themes = @{
     dark  = [ordered]@{ Bg = '#0E0F12'; Surface = '#15171C'; Surface2 = '#1C1F26'; Surface3 = '#262A34'; Line = '#23262F'; Line2 = '#353841'; Txt = '#EDEEF3'; Mut = '#A3A7B2'; Dim = '#6E727C'
-                        Acc = '#3D6BFF'; AccSoft = '#263D6BFF'; OnAcc = '#FFFFFF'; Ok = '#4ADE80'; OkSoft = '#1F4ADE80'; Warn = '#FBBF24'; WarnSoft = '#1FFBBF24'; Err = '#F87171'; ErrSoft = '#1FF87171'
-                        Info = '#7AA2FF'; InfoSoft = '#1F7AA2FF'; Hover = '#12FFFFFF'; Overlay = '#B3000000' }
+                        Acc = '#8B5CF6'; AccSoft = '#2E8B5CF6'; OnAcc = '#FFFFFF'; Ok = '#4ADE80'; OkSoft = '#1F4ADE80'; Warn = '#FBBF24'; WarnSoft = '#1FFBBF24'; Err = '#F87171'; ErrSoft = '#1FF87171'
+                        Info = '#B39DFF'; InfoSoft = '#1FB39DFF'; Hover = '#12FFFFFF'; Overlay = '#B3000000' }
     light = [ordered]@{ Bg = '#F3F4F7'; Surface = '#FFFFFF'; Surface2 = '#F4F5F8'; Surface3 = '#E4E6EB'; Line = '#E3E5EA'; Line2 = '#CDD0D7'; Txt = '#16181D'; Mut = '#4A4E58'; Dim = '#80848E'
-                        Acc = '#2E5BEA'; AccSoft = '#1A2E5BEA'; OnAcc = '#FFFFFF'; Ok = '#15803D'; OkSoft = '#1A16A34A'; Warn = '#B45309'; WarnSoft = '#1AD97706'; Err = '#DC2626'; ErrSoft = '#1ADC2626'
-                        Info = '#2457D6'; InfoSoft = '#142457D6'; Hover = '#0B000000'; Overlay = '#73000000' }
+                        Acc = '#7C3AED'; AccSoft = '#1A7C3AED'; OnAcc = '#FFFFFF'; Ok = '#15803D'; OkSoft = '#1A16A34A'; Warn = '#B45309'; WarnSoft = '#1AD97706'; Err = '#DC2626'; ErrSoft = '#1ADC2626'
+                        Info = '#6D28D9'; InfoSoft = '#146D28D9'; Hover = '#0B000000'; Overlay = '#73000000' }
 }
 try {
     if (-not ('HenoxNative.Dwm' -as [type])) {

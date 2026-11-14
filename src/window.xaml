@@ -19,8 +19,8 @@
     <SolidColorBrush x:Key="Txt" Color="#EDEEF3"/>
     <SolidColorBrush x:Key="Mut" Color="#A3A7B2"/>
     <SolidColorBrush x:Key="Dim" Color="#6E727C"/>
-    <SolidColorBrush x:Key="Acc" Color="#3D6BFF"/>
-    <SolidColorBrush x:Key="AccSoft" Color="#263D6BFF"/>
+    <SolidColorBrush x:Key="Acc" Color="#8B5CF6"/>
+    <SolidColorBrush x:Key="AccSoft" Color="#2E8B5CF6"/>
     <SolidColorBrush x:Key="OnAcc" Color="#FFFFFF"/>
     <SolidColorBrush x:Key="Ok" Color="#4ADE80"/>
     <SolidColorBrush x:Key="OkSoft" Color="#1F4ADE80"/>
@@ -28,8 +28,8 @@
     <SolidColorBrush x:Key="WarnSoft" Color="#1FFBBF24"/>
     <SolidColorBrush x:Key="Err" Color="#F87171"/>
     <SolidColorBrush x:Key="ErrSoft" Color="#1FF87171"/>
-    <SolidColorBrush x:Key="Info" Color="#7AA2FF"/>
-    <SolidColorBrush x:Key="InfoSoft" Color="#1F7AA2FF"/>
+    <SolidColorBrush x:Key="Info" Color="#B39DFF"/>
+    <SolidColorBrush x:Key="InfoSoft" Color="#1FB39DFF"/>
     <SolidColorBrush x:Key="Hover" Color="#12FFFFFF"/>
     <SolidColorBrush x:Key="Overlay" Color="#B3000000"/>
     <FontFamily x:Key="Icons">Segoe Fluent Icons, Segoe MDL2 Assets</FontFamily>
