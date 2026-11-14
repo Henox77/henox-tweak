@@ -756,9 +756,21 @@ function Build-AppList {
         Reveal $card $i; $i++
     }
 }
-function Update-AppCount { $W.TxtAppCount.Text = "$(@($S.AppRows.Values | Where-Object { $_.cb.IsChecked }).Count) seçili  ·  $($S.AppRows.Count) uygulama" }
+function Update-AppCount {
+    if ($S.AppView -eq 'installed') {
+        $W.TxtAppCount.Text = "$(@($S.InstRows | Where-Object { $_.cb.IsChecked }).Count) seçili  ·  $($S.InstRows.Count) kurulu program"
+        $W.TxtAppView.Text = 'Bilgisayarındaki tüm programlar'
+    } else {
+        $W.TxtAppCount.Text = "$(@($S.AppRows.Values | Where-Object { $_.cb.IsChecked }).Count) seçili  ·  $($S.AppRows.Count) uygulama"
+        $W.TxtAppView.Text = $(if ($S.InstalledScanned) { "Katalogdan $($S.Installed.Count) tanesi kurulu" } else { 'Kurulu olanlar kontrol ediliyor...' })
+    }
+}
 $S.Filters['Apps'] = {
     param($q)
+    if ($S.AppView -eq 'installed') {
+        foreach ($r in $S.InstRows) { $r.row.Visibility = $(if (Test-Match $r.key $q) { 'Visible' } else { 'Collapsed' }) }
+        return
+    }
     $vis = @{}
     foreach ($r in $S.AppRows.Values) {
         $show = (Test-Match $r.key $q) -and (-not $S.AppShowSel -or $r.cb.IsChecked)
@@ -768,41 +780,100 @@ $S.Filters['Apps'] = {
     foreach ($c in $S.AppCats) { $c.Visibility = $(if ($vis[$c.GetHashCode()]) { 'Visible' } else { 'Collapsed' }) }
 }
 function Update-AppFilter { & $S.Filters['Apps'] ($W.GlobalSearch.Text.Trim().ToLower([Globalization.CultureInfo]'tr-TR')) }
-$W.BtnAppClear.Add_Click({ foreach ($r in $S.AppRows.Values) { $r.cb.IsChecked = $false }; Update-AppCount; if ($S.AppShowSel) { Update-AppFilter } })
+$W.BtnAppClear.Add_Click({ foreach ($r in $S.AppRows.Values) { $r.cb.IsChecked = $false }; foreach ($r in $S.InstRows) { $r.cb.IsChecked = $false }; Update-AppCount; if ($S.AppShowSel) { Update-AppFilter } })
 $W.BtnAppShowSel.Add_Click({
     $S.AppShowSel = -not $S.AppShowSel
     $W.BtnAppShowSel.Content = $(if ($S.AppShowSel) { 'Tümünü göster' } else { 'Sadece seçilenleri göster' })
     Update-AppFilter
 })
 $W.BtnAppInstalled.Add_Click({
-    if (-not $S.Installed.Count) { Toast 'Kurulu uygulamalar henüz okunmadı, birkaç saniye bekle.' 'Warn'; return }
-    $c = 0; foreach ($r in $S.AppRows.Values) { $on = $S.Installed -contains $r.app.id; $r.cb.IsChecked = $on; if ($on) { $c++ } }
-    Update-AppCount; Toast "Kurulu $c uygulama seçildi. 'Seçilenleri kur' bunları günceller." 'Info'
+    if (-not $S.InstalledScanned) { Toast 'Kurulu uygulamalar henüz okunuyor, birkaç saniye bekle.' 'Warn'; return }
+    $cnt = 0; foreach ($r in $S.AppRows.Values) { $on = $S.Installed -contains $r.app.id; $r.cb.IsChecked = $on; if ($on) { $cnt++ } }
+    Update-AppCount; Toast "Kurulu $cnt uygulama seçildi. 'Seçilenleri kur' bunları günceller." 'Info'
 })
 $W.BtnGetWinget.Add_Click({ Open-Url 'ms-windows-store://pdp/?productid=9NBLGGH4NNS1' })
 
+# Kurulu tespiti üç kaynaktan: winget, Windows'un kurulu programlar listesi (kayıt defteri) ve Store uygulamaları.
+# Sadece winget'e bakmak, kullanıcı klasörüne kurulan Discord / Opera GX gibi programları kaçırıyordu.
 $JobWingetScan = {
-    $tmp = Join-Path $env:TEMP ("henox_wg_{0}.json" -f (Get-Random))
-    & winget export -o $tmp --include-versions --accept-source-agreements --disable-interactivity 2>&1 | Out-Null
-    $ids = @()
-    if (Test-Path -LiteralPath $tmp) {
-        try { $j = Get-Content -LiteralPath $tmp -Raw -Encoding UTF8 | ConvertFrom-Json; foreach ($s in $j.Sources) { foreach ($p in $s.Packages) { $ids += $p.PackageIdentifier } } } catch {}
-        Remove-Item -LiteralPath $tmp -Force -ErrorAction SilentlyContinue
+    $ids = New-Object 'System.Collections.Generic.HashSet[string]'
+    if (Get-Command winget -ErrorAction SilentlyContinue) {
+        $tmp = Join-Path $env:TEMP ("henox_wg_{0}.json" -f (Get-Random))
+        & winget export -o $tmp --accept-source-agreements --disable-interactivity 2>&1 | Out-Null
+        if (Test-Path -LiteralPath $tmp) {
+            try { $j = Get-Content -LiteralPath $tmp -Raw -Encoding UTF8 | ConvertFrom-Json; foreach ($s in $j.Sources) { foreach ($p in $s.Packages) { [void]$ids.Add($p.PackageIdentifier) } } } catch {}
+            Remove-Item -LiteralPath $tmp -Force -ErrorAction SilentlyContinue
+        }
     }
-    return @{ ids = $ids }
+    $progs = @(Get-HInstalledPrograms)
+    $appx = @(Get-AppxPackage -ErrorAction SilentlyContinue | Select-Object -ExpandProperty Name)
+    $found = New-Object System.Collections.ArrayList
+    foreach ($a in $HT.Apps.apps) {
+        $hit = $ids.Contains($a.id)
+        if (-not $hit) { $rx = Get-HAppRegex $a; foreach ($p in $progs) { if ($p.Name -match $rx) { $hit = $true; break } } }
+        if (-not $hit -and $a.appx) { foreach ($x in $appx) { if ($x -like "*$($a.appx)*") { $hit = $true; break } } }
+        if ($hit) { [void]$found.Add($a.id) }
+    }
+    return @{ ids = @($found); progs = $progs }
 }
 $Handlers['wingetscan'] = {
     param($r, $ok)
     if (-not $r) { return }
-    $S.Installed = @($r.ids); $cnt = 0
+    $S.Installed = @($r.ids); $S.InstalledScanned = $true; $cnt = 0
     foreach ($row in $S.AppRows.Values) { $on = $S.Installed -contains $row.app.id; $row.inst.Visibility = $(if ($on) { 'Visible' } else { 'Collapsed' }); if ($on) { $cnt++ } }
-    Set-Status "Uygulama listesi hazır  ·  listedekilerden $cnt tanesi zaten kurulu."
+    Build-InstalledList @($r.progs)
+    Set-Status "Uygulama listesi hazır  ·  katalogdan $cnt tanesi kurulu  ·  bilgisayarında toplam $(@($r.progs).Count) program var."
 }
 function Start-WingetScan {
-    if (-not $S.HasWinget) { $W.WingetWarn.Visibility = 'Visible'; foreach ($n in 'BtnAppInstall', 'BtnAppUninstall', 'BtnAppUpgrade') { $W[$n].IsEnabled = $false }; return }
+    if (-not $S.HasWinget) { $W.WingetWarn.Visibility = 'Visible'; foreach ($n in 'BtnAppInstall', 'BtnAppUpgrade') { $W[$n].IsEnabled = $false } }
     Set-Status 'Kurulu uygulamalar kontrol ediliyor...' 'Warn'
     Start-HJob 'wingetscan' $JobWingetScan -Background
 }
+
+# ---- Bilgisayarımdakiler: katalogda olsun olmasın kurulu tüm programlar
+$S.InstRows = @(); $S.AppView = 'catalog'
+function Build-InstalledList($progs) {
+    $W.InstList.Children.Clear(); $S.InstRows = @()
+    $totMB = ($progs | Measure-Object -Property SizeMB -Sum).Sum
+    $W.InstList.Children.Add((New-Section ("{0} program kurulu  ·  toplam {1}" -f $progs.Count, (Format-HSize ([int64]$totMB * 1MB))) 'Windows''un "Programlar ve Özellikler" listesiyle aynıdır. Seçip "Seçilenleri kaldır"a bas. Kaldırma önce sessiz yapılır, olmazsa programın kendi kaldırıcısı açılır.')) | Out-Null
+    $card = New-Card; $sp = New-Object System.Windows.Controls.StackPanel; $card.Child = $sp
+    $W.InstList.Children.Add($card) | Out-Null
+    $n = 0
+    foreach ($p in $progs) {
+        $row = New-Object System.Windows.Controls.Border; $row.Padding = '14,9'; $row.SetResourceReference($DP.BdBr, 'Line')
+        $row.BorderThickness = $(if ($n -lt $progs.Count - 1) { '0,0,0,1' } else { '0' })
+        $g = New-Object System.Windows.Controls.Grid
+        foreach ($wd in '*', 'Auto') { $cdf = New-Object System.Windows.Controls.ColumnDefinition; $cdf.Width = $wd; $g.ColumnDefinitions.Add($cdf) }
+        $cb = New-Object System.Windows.Controls.CheckBox; $cb.Style = $win.FindResource('Chk'); $cb.Tag = $p
+        $inf = New-Object System.Windows.Controls.StackPanel
+        $inf.Children.Add((New-Text $p.Name 13 'Txt' 'SemiBold')) | Out-Null
+        $meta = @($p.Publisher, $(if ($p.Version) { "v$($p.Version)" }), $p.Scope) | Where-Object { $_ }
+        $m = New-Text ($meta -join '  ·  ') 11.5 'Dim'; $m.Margin = '0,2,0,0'; $m.TextTrimming = 'CharacterEllipsis'; $inf.Children.Add($m) | Out-Null
+        $cb.Content = $inf
+        $cb.Add_Click({ Update-AppCount })
+        $sz = New-Text $(if ($p.SizeMB -gt 0) { Format-HSize ([int64]$p.SizeMB * 1MB) } else { '' }) 12 'Dim'; $sz.FontFamily = $Mono; $sz.VerticalAlignment = 'Center'; $sz.Margin = '12,0,0,0'
+        [System.Windows.Controls.Grid]::SetColumn($sz, 1)
+        $g.Children.Add($cb) | Out-Null; $g.Children.Add($sz) | Out-Null
+        $row.Child = $g; $sp.Children.Add($row) | Out-Null
+        $S.InstRows += @{ p = $p; cb = $cb; row = $row; key = ("$($p.Name) $($p.Publisher)").ToLower([Globalization.CultureInfo]'tr-TR') }
+        if ($S.AppView -eq 'installed') { Reveal $row $n }
+        $n++
+    }
+    Update-AppCount
+}
+function Set-AppView([string]$v) {
+    $S.AppView = $v; $inst = ($v -eq 'installed')
+    $W.AppCatalogView.Visibility = $(if ($inst) { 'Collapsed' } else { 'Visible' })
+    $W.AppInstalledView.Visibility = $(if ($inst) { 'Visible' } else { 'Collapsed' })
+    $pg = $(if ($inst) { $W.AppInstalledView } else { $W.AppCatalogView })
+    $tt = New-Object System.Windows.Media.TranslateTransform 0, 8; $pg.RenderTransform = $tt
+    Anim $pg $DP.Opacity 1 220 0; Anim $tt $DP.TY 0 300 8
+    foreach ($n in 'BtnAppInstall', 'BtnAppInstalled', 'BtnAppShowSel') { $W[$n].Visibility = $(if ($inst) { 'Collapsed' } else { 'Visible' }) }
+    $W.GlobalSearch.Text = ''
+    Update-AppCount
+}
+$W.AppViewCatalog.Add_Checked({ Set-AppView 'catalog' })
+$W.AppViewInstalled.Add_Checked({ Set-AppView 'installed' })
 $JobWinget = {
     param($a)
     $fail = 0
@@ -823,6 +894,15 @@ $JobWinget = {
         } else {
             Write-HLog ("▸ {0} kaldırılıyor" -f $app.name) 'head'
             $code = Invoke-HWinget @('uninstall', '--id', $app.id, '--exact', '--silent', '--accept-source-agreements', '--disable-interactivity')
+            if ($code -ne 0) {
+                # winget bu kurulumu tanımıyorsa (ör. kullanıcı klasörüne kurulmuş Discord), Windows'un kurulu programlar listesinden kaldır
+                $rx = Get-HAppRegex $app
+                $p = @(Get-HInstalledPrograms | Where-Object { $_.Name -match $rx }) | Select-Object -First 1
+                if ($p) {
+                    Write-HLog ("  winget tanımadı, Windows kaldırıcısı kullanılıyor: {0}" -f $p.Name) 'dim'
+                    try { $null = Uninstall-HProgram $p; if (-not (Test-Path -LiteralPath $p.RegPath)) { $code = 0 } else { $code = 1; Write-HLog '  kaldırıcı açıldı ama program hâlâ kurulu görünüyor' 'warn' } } catch { Write-HLog ('  ' + $_.Exception.Message) 'err' }
+                }
+            }
         }
         if ($code -eq 0) { Write-HLog '  tamam' 'ok' }
         elseif ($code -eq -1978335189 -or $code -eq -1978335135) { Write-HLog '  zaten kurulu ve güncel' 'ok' }
@@ -842,7 +922,32 @@ $Handlers['winget'] = {
     }
     Start-HJob 'wingetscan' $JobWingetScan -Background
 }
+$JobUninstallProgs = {
+    param($a)
+    $n = $a.progs.Count; $i = 0; $fail = 0
+    foreach ($p in $a.progs) {
+        $i++
+        Send-UI 'progress' @{ v = [int](($i - 1) / $n * 100); s = "$i / $n  ·  $($p.Name)" }
+        Write-HLog ("▸ {0} kaldırılıyor" -f $p.Name) 'head'
+        try {
+            $how = Uninstall-HProgram $p
+            Start-Sleep -Milliseconds 800
+            if (-not (Test-Path -LiteralPath $p.RegPath)) { Write-HLog ("  kaldırıldı ({0})" -f $how) 'ok' }
+            elseif ($how -eq 'vendor') { Write-HLog '  kaldırıcı penceresi açıldı; tamamladıysan liste yenilenince kaybolur' 'warn' }
+            else { $fail++; Write-HLog '  kaldırılamadı' 'err' }
+        } catch { $fail++; Write-HLog ('  HATA: ' + $_.Exception.Message) 'err' }
+    }
+    return @{ mode = 'uninstall'; fail = $fail; n = $n }
+}
+$Handlers['uninstallprogs'] = $Handlers['winget']
 function Start-Winget([string]$mode) {
+    if ($mode -eq 'uninstall' -and $S.AppView -eq 'installed') {
+        $progs = @($S.InstRows | Where-Object { $_.cb.IsChecked } | ForEach-Object { $_.p })
+        if (-not $progs) { Toast 'Önce listeden kaldırılacak programları seç.' 'Warn'; return }
+        if (-not (Ask ("• " + (($progs | ForEach-Object { $_.Name }) -join "`n• ") + "`n`nÖnce sessiz kaldırma denenir; olmazsa programın kendi kaldırıcısı açılır ve adımları senin tamamlaman gerekir.") "$($progs.Count) program kaldırılacak" 'Warn' 'Kaldır')) { return }
+        Start-HJob 'uninstallprogs' $JobUninstallProgs @{ progs = $progs }
+        return
+    }
     $apps = @($S.AppRows.Values | Where-Object { $_.cb.IsChecked } | ForEach-Object { $_.app })
     if ($mode -ne 'upgrade' -and -not $apps) { Toast 'Önce listeden en az bir uygulama seç.' 'Warn'; return }
     if ($mode -eq 'uninstall' -and -not (Ask ("• " + (($apps | ForEach-Object { $_.name }) -join "`n• ")) "$($apps.Count) uygulama kaldırılacak" 'Warn' 'Kaldır')) { return }
@@ -856,41 +961,81 @@ $W.BtnAppUpgrade.Add_Click({ Start-Winget 'upgrade' })
 
 # ─────────────────────────────────────────────────────────────── Debloat
 $S.DbRows = [ordered]@{}
+function New-DebloatCard($a, [string]$badge, [string]$badgeKind) {
+    $b = New-Card; $b.Width = 300; $b.Margin = '0,0,12,12'; $b.Padding = '14,12'
+    $cb = New-Object System.Windows.Controls.CheckBox; $cb.Style = $win.FindResource('Chk'); $cb.Tag = $a.pkg
+    $sp = New-Object System.Windows.Controls.StackPanel
+    $l1 = New-Object System.Windows.Controls.WrapPanel
+    $l1.Children.Add((New-Text $a.name 13 'Txt' 'SemiBold')) | Out-Null
+    if ($badge) { $l1.Children.Add((New-Badge $badge $badgeKind)) | Out-Null }
+    $sp.Children.Add($l1) | Out-Null
+    $d = New-Text $a.desc 11.5 'Dim' -Wrap; $d.Margin = '0,2,0,0'; $sp.Children.Add($d) | Out-Null
+    $cb.Content = $sp; $cb.ToolTip = $a.pkg
+    $b.Child = $cb
+    $S.DbRows[$a.pkg] = @{ a = $a; cb = $cb; card = $b; key = ("$($a.name) $($a.desc) $($a.pkg)").ToLower([Globalization.CultureInfo]'tr-TR') }
+    return $b
+}
 function Build-DebloatList {
-    $W.DebloatList.Children.Clear(); $S.DbRows.Clear(); $i = 0
+    $W.DebloatHost.Children.Clear(); $S.DbRows.Clear(); $i = 0
+    $W.DebloatHost.Children.Add((New-Section 'Önceden yüklü gelenler' 'Mavi etiketliler çoğu kişi için güvenle kaldırılabilir. Etiketsizleri kullanıyorsan bırak.')) | Out-Null
+    $wrap = New-Object System.Windows.Controls.WrapPanel
+    $W.DebloatHost.Children.Add($wrap) | Out-Null
     foreach ($a in $HT.Debloat.apps) {
-        $b = New-Card; $b.Width = 300; $b.Margin = '0,0,12,12'; $b.Padding = '14,12'
-        $cb = New-Object System.Windows.Controls.CheckBox; $cb.Style = $win.FindResource('Chk'); $cb.Tag = $a.pkg
-        $sp = New-Object System.Windows.Controls.StackPanel
-        $l1 = New-Object System.Windows.Controls.WrapPanel
-        $l1.Children.Add((New-Text $a.name 13 'Txt' 'SemiBold')) | Out-Null
-        if ($a.safe) { $l1.Children.Add((New-Badge 'GÜVENLİ' 'Info')) | Out-Null }
-        $sp.Children.Add($l1) | Out-Null
-        $d = New-Text $a.desc 11.5 'Dim' -Wrap; $d.Margin = '0,2,0,0'; $sp.Children.Add($d) | Out-Null
-        $cb.Content = $sp; $cb.ToolTip = $a.pkg
-        $b.Child = $cb; $W.DebloatList.Children.Add($b) | Out-Null
-        $S.DbRows[$a.pkg] = @{ a = $a; cb = $cb; card = $b; key = ("$($a.name) $($a.desc) $($a.pkg)").ToLower([Globalization.CultureInfo]'tr-TR') }
+        $b = New-DebloatCard $a $(if ($a.safe) { 'GÜVENLİ' } else { '' }) 'Info'
+        $wrap.Children.Add($b) | Out-Null
         Reveal $b $i; $i++
     }
+    $S.DbOtherHdr = New-Section 'Bilgisayarındaki diğer Store uygulamaları' 'Sonradan kurduğun veya Windows ile gelen diğer uygulamalar. Windows Mağazası, kodekler ve sistem bileşenleri güvenlik için listelenmez.'
+    $S.DbOtherWrap = New-Object System.Windows.Controls.WrapPanel
+    $W.DebloatHost.Children.Add($S.DbOtherHdr) | Out-Null; $W.DebloatHost.Children.Add($S.DbOtherWrap) | Out-Null
+    $S.DbOtherHdr.Visibility = 'Collapsed'
 }
 $S.Filters['Debloat'] = { param($q); foreach ($r in $S.DbRows.Values) { $r.card.Visibility = $(if (Test-Match $r.key $q) { 'Visible' } else { 'Collapsed' }) } }
 $JobAppxScan = {
+    param($a)
     try { $pk = @(Get-AppxPackage -AllUsers -ErrorAction Stop) } catch { $pk = @(Get-AppxPackage -ErrorAction SilentlyContinue) }
-    return @{ names = @($pk | Select-Object -ExpandProperty Name -Unique) }
+    # Kaldırılması sistemi bozabilecek paketler: Mağaza, winget, kodekler, çalışma ortamları, kabuk bileşenleri, Xbox girişi
+    $protect = '^(Microsoft\.(WindowsStore|DesktopAppInstaller|StorePurchaseApp|SecHealthUI|Winget\.Source|Services\.Store\.Engagement|XboxIdentityProvider|Xbox\.TCUI|GamingServices|ApplicationCompatibilityEnhancements|WidgetsPlatformRuntime|LanguageExperiencePack.*|Windows\..*|UI\.Xaml.*|VCLibs.*|NET\..*|WindowsAppRuntime.*|WinAppRuntime.*|.*Extension.*|AAD\.BrokerPlugin|AccountsControl|AsyncTextService|BioEnrollment|CredDialogHost|ECApp|LockApp|MicrosoftEdge.*|Edge.*|Win32WebViewHost|OneDriveSync|DirectXRuntime|WindowsTerminal|Paint|WindowsNotepad|ScreenSketch|WindowsCalculator|Windows\.Photos|ZuneMusic|WindowsCamera)|MicrosoftWindows\..*|Windows\..*|windows\..*|NcsiUwpApp|MicrosoftCorporationII\.(WinAppRuntime|WindowsSubsystemForLinux).*|[0-9a-fA-F]{8}-.*|Microsoft\.6365217CE6EB4|Microsoft\.Office\..*|Microsoft\.OfficePushNotificationUtility|aimgr|NVIDIACorp\..*|AdvancedMicroDevicesInc.*|AppUp\..*|RealtekSemiconductorCorp\..*|DolbyLaboratories\..*|WavesAudio.*|SynapticsIncorporated\..*|ELANMicroelectronics.*|.*\.ShellExtension.*|.*AudioControl.*|.*ControlCenter.*|.*CommandCenter.*)$'
+    $known = @($a.known)
+    $others = New-Object System.Collections.ArrayList; $seen = @{}
+    foreach ($p in $pk) {
+        if ($p.IsFramework -or $p.NonRemovable -or "$($p.SignatureKind)" -eq 'System') { continue }
+        # Masaüstü programlarının sağ tık menüsü vb. için kaydettiği "seyrek" paketler (VS Code, WinRAR, Notion...) WindowsApps dışında durur; silinirse program bozulur
+        if ("$($p.InstallLocation)" -notlike '*\WindowsApps\*') { continue }
+        if ($p.Name -match $protect -or $known -contains $p.Name -or $seen[$p.Name]) { continue }
+        $seen[$p.Name] = $true
+        $nm = $null; $man = $null
+        try { $man = (Get-AppxPackageManifest -Package $p.PackageFullName -ErrorAction Stop).Package } catch {}
+        if ($man -and "$($man.Properties.AllowExternalContent)" -eq 'true') { continue }   # masaüstü programına bağlı seyrek paket
+        if ($man) { $nm = $man.Properties.DisplayName }
+        if (-not $nm -or $nm -like 'ms-resource*') { $nm = (($p.Name -split '\.', 2)[-1] -creplace '([a-z])([A-Z])', '$1 $2') }
+        [void]$others.Add(@{ pkg = $p.Name; name = "$nm".Trim(); desc = "$($p.Publisher -replace '^CN=([^,]+).*', '$1')  ·  v$($p.Version)" })
+    }
+    return @{ names = @($pk | Select-Object -ExpandProperty Name -Unique); others = @($others | Sort-Object { $_.name }) }
 }
 $Handlers['appxscan'] = {
     param($r, $ok)
     if (-not $r) { return }
     $S.Appx = @($r.names); $cnt = 0
-    foreach ($row in $S.DbRows.Values) {
-        $has = $S.Appx -contains $row.a.pkg
-        $row.cb.IsEnabled = $has
-        if (-not $has) { $row.cb.IsChecked = $false; Anim $row.card $DP.Opacity 0.45 300 } else { Anim $row.card $DP.Opacity 1 300; $cnt++ }
+    foreach ($row in @($S.DbRows.Values)) {
+        if (-not $row.other) {
+            $has = $S.Appx -contains $row.a.pkg
+            $row.cb.IsEnabled = $has
+            if (-not $has) { $row.cb.IsChecked = $false; Anim $row.card $DP.Opacity 0.45 300 } else { Anim $row.card $DP.Opacity 1 300; $cnt++ }
+        }
     }
-    Set-Status "Listedeki uygulamalardan $cnt tanesi bu bilgisayarda yüklü."
+    # Diğer Store uygulamaları bölümünü yeniden kur
+    foreach ($k in @($S.DbRows.Keys)) { if ($S.DbRows[$k].other) { $S.DbRows.Remove($k) } }
+    $S.DbOtherWrap.Children.Clear(); $i = 0
+    foreach ($o in @($r.others)) {
+        $b = New-DebloatCard $o '' 'Info'; $S.DbRows[$o.pkg].other = $true
+        $S.DbOtherWrap.Children.Add($b) | Out-Null; Reveal $b $i; $i++
+    }
+    $S.DbOtherHdr.Visibility = $(if ($i) { 'Visible' } else { 'Collapsed' })
+    Set-Status "Listedeki uygulamalardan $cnt tanesi yüklü  ·  ayrıca $i diğer Store uygulaması bulundu."
 }
-function Start-AppxScan { Set-Status 'Yüklü uygulamalar okunuyor...' 'Warn'; Start-HJob 'appxscan' $JobAppxScan -Background }
-$W.BtnDbSafe.Add_Click({ foreach ($r in $S.DbRows.Values) { $r.cb.IsChecked = ($r.a.safe -and $r.cb.IsEnabled) } })
+function Start-AppxScan { Set-Status 'Yüklü uygulamalar okunuyor...' 'Warn'; Start-HJob 'appxscan' $JobAppxScan @{ known = @($HT.Debloat.apps | ForEach-Object { $_.pkg }) } -Background }
+$W.BtnDbSafe.Add_Click({ foreach ($r in $S.DbRows.Values) { $r.cb.IsChecked = ([bool]$r.a.safe -and $r.cb.IsEnabled) } })
 $JobDebloat = {
     param($a)
     $n = $a.pkgs.Count; $i = 0; $fail = 0

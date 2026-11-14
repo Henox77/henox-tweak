@@ -288,3 +288,56 @@ function Get-HDnsText {
     }
     if ($parts) { return ($parts -join '   ·   ') } else { return 'Bağlı ağ yok' }
 }
+
+# ---- Kurulu programlar (Windows "Programlar ve Özellikler" listesiyle aynı kaynak)
+function Get-HInstalledPrograms {
+    $keys = @(
+        @{ p = 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall'; s = 'Tüm kullanıcılar' },
+        @{ p = 'HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall'; s = 'Tüm kullanıcılar (32 bit)' },
+        @{ p = 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Uninstall'; s = 'Bu kullanıcı' }
+    )
+    $seen = @{}; $out = New-Object System.Collections.ArrayList
+    foreach ($k in $keys) {
+        if (-not (Test-Path -LiteralPath $k.p)) { continue }
+        foreach ($sub in @(Get-ChildItem -LiteralPath $k.p -ErrorAction SilentlyContinue)) {
+            $v = Get-ItemProperty -LiteralPath $sub.PSPath -ErrorAction SilentlyContinue
+            if (-not $v -or -not $v.DisplayName) { continue }
+            if ($v.SystemComponent -eq 1 -or $v.ParentKeyName -or "$($v.ReleaseType)" -match 'Update|Hotfix') { continue }
+            if (-not $v.UninstallString -and -not $v.QuietUninstallString) { continue }
+            $name = "$($v.DisplayName)".Trim()
+            $id = "$name|$($v.DisplayVersion)"
+            if ($seen[$id]) { continue }; $seen[$id] = $true
+            $mb = 0; try { $mb = [math]::Round([double]$v.EstimatedSize / 1024) } catch {}
+            [void]$out.Add([pscustomobject]@{
+                Name = $name; Version = "$($v.DisplayVersion)".Trim(); Publisher = "$($v.Publisher)".Trim(); SizeMB = $mb
+                Uninstall = "$($v.UninstallString)".Trim(); Quiet = "$($v.QuietUninstallString)".Trim(); Scope = $k.s; RegPath = $sub.PSPath
+            })
+        }
+    }
+    return @($out | Sort-Object Name)
+}
+
+# Katalogdaki bir uygulamanın kayıt defterindeki adıyla eşleşmesi için desen
+function Get-HAppRegex($a) {
+    if ($a.match) { return "(?i)$($a.match)" }
+    return '(?i)(^|[^\w])' + [regex]::Escape($a.name) + '([^\w]|$)'
+}
+
+# Programı kaldır: önce winget (sessiz), olmazsa MSI (sessiz), olmazsa üreticinin kendi kaldırıcısı
+function Uninstall-HProgram($p) {
+    if (Get-Command winget -ErrorAction SilentlyContinue) {
+        $code = Invoke-HWinget @('uninstall', '--name', $p.Name, '--exact', '--silent', '--accept-source-agreements', '--disable-interactivity')
+        if ($code -eq 0) { return 'winget' }
+    }
+    if ($p.Uninstall -match '(?i)msiexec' -and $p.Uninstall -match '\{[0-9A-Fa-f-]{36}\}') {
+        $guid = $Matches[0]
+        Write-HLog "  MSI ile sessiz kaldırılıyor ($guid)" 'dim'
+        $pr = Start-Process msiexec.exe -ArgumentList "/x $guid /qn /norestart" -Wait -PassThru
+        if ($pr.ExitCode -in 0, 1605, 1641, 3010) { return 'msi' }
+    }
+    $cmd = $p.Quiet; if (-not $cmd) { $cmd = $p.Uninstall }
+    if (-not $cmd) { throw 'Bu program için kaldırma komutu bulunamadı.' }
+    Write-HLog '  Programın kendi kaldırıcısı açılıyor; açılan pencerede adımları tamamla.' 'warn'
+    $null = Start-Process cmd.exe -ArgumentList "/s /c `"$cmd`"" -Wait -PassThru -WindowStyle Hidden
+    return 'vendor'
+}

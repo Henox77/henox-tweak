@@ -1,88 +1,487 @@
 {
-  "categories": ["Tarayıcı", "İletişim", "Oyun", "Medya", "Araçlar", "Sistem & Donanım", "Güvenlik", "Ofis & Not", "Geliştirme", "Çalışma Ortamları"],
+  "categories": [
+    "Tarayıcı",
+    "İletişim",
+    "Oyun",
+    "Medya",
+    "Araçlar",
+    "Sistem & Donanım",
+    "Güvenlik",
+    "Ofis & Not",
+    "Geliştirme",
+    "Çalışma Ortamları"
+  ],
   "apps": [
-    { "id": "Google.Chrome",                       "name": "Google Chrome",        "cat": "Tarayıcı", "desc": "En yaygın tarayıcı" },
-    { "id": "Mozilla.Firefox",                     "name": "Firefox",              "cat": "Tarayıcı", "desc": "Açık kaynak, gizlilik odaklı" },
-    { "id": "Brave.Brave",                         "name": "Brave",                "cat": "Tarayıcı", "desc": "Dahili reklam engelleyici" },
-    { "id": "Opera.OperaGX",                       "name": "Opera GX",             "cat": "Tarayıcı", "desc": "Oyuncular için RAM/CPU sınırlayıcılı" },
-    { "id": "Vivaldi.Vivaldi",                     "name": "Vivaldi",              "cat": "Tarayıcı", "desc": "Çok özelleştirilebilir" },
-    { "id": "LibreWolf.LibreWolf",                 "name": "LibreWolf",            "cat": "Tarayıcı", "desc": "Telemetrisi sökülmüş Firefox" },
-    { "id": "Zen-Team.Zen-Browser",                "name": "Zen Browser",          "cat": "Tarayıcı", "desc": "Dikey sekmeli, modern Firefox tabanı" },
-
-    { "id": "Discord.Discord",                     "name": "Discord",              "cat": "İletişim", "desc": "Sesli sohbet ve topluluklar" },
-    { "id": "Telegram.TelegramDesktop",            "name": "Telegram",             "cat": "İletişim", "desc": "Hızlı mesajlaşma" },
-    { "id": "9NKSQGP7F2NH",                        "name": "WhatsApp",             "cat": "İletişim", "desc": "Microsoft Store sürümü", "source": "msstore" },
-    { "id": "Zoom.Zoom",                           "name": "Zoom",                 "cat": "İletişim", "desc": "Görüntülü toplantı" },
-    { "id": "Microsoft.Teams",                     "name": "Microsoft Teams",      "cat": "İletişim", "desc": "Okul ve iş toplantıları" },
-    { "id": "TeamSpeakSystems.TeamSpeakClient",    "name": "TeamSpeak",            "cat": "İletişim", "desc": "Düşük gecikmeli oyun sesli sohbeti" },
-
-    { "id": "Valve.Steam",                         "name": "Steam",                "cat": "Oyun", "desc": "PC oyun mağazası" },
-    { "id": "EpicGames.EpicGamesLauncher",         "name": "Epic Games",           "cat": "Oyun", "desc": "Haftalık bedava oyunlar" },
-    { "id": "ElectronicArts.EADesktop",            "name": "EA App",               "cat": "Oyun", "desc": "EA oyunları (FC, Battlefield)" },
-    { "id": "Ubisoft.Connect",                     "name": "Ubisoft Connect",      "cat": "Oyun", "desc": "Ubisoft oyunları" },
-    { "id": "Blizzard.BattleNet",                  "name": "Battle.net",           "cat": "Oyun", "desc": "Blizzard ve Call of Duty" },
-    { "id": "GOG.Galaxy",                          "name": "GOG Galaxy",           "cat": "Oyun", "desc": "DRM'siz oyunlar" },
-    { "id": "Playnite.Playnite",                   "name": "Playnite",             "cat": "Oyun", "desc": "Tüm kütüphaneler tek yerde" },
-    { "id": "Guru3D.Afterburner",                  "name": "MSI Afterburner",      "cat": "Oyun", "desc": "FPS göstergesi ve GPU ayarı" },
-
-    { "id": "VideoLAN.VLC",                        "name": "VLC",                  "cat": "Medya", "desc": "Her formatı oynatır" },
-    { "id": "9NCBCSZSJRSB",                        "name": "Spotify",              "cat": "Medya", "desc": "Microsoft Store sürümü", "source": "msstore" },
-    { "id": "OBSProject.OBSStudio",                "name": "OBS Studio",           "cat": "Medya", "desc": "Yayın ve ekran kaydı" },
-    { "id": "CodecGuide.K-LiteCodecPack.Standard", "name": "K-Lite Codec Pack",    "cat": "Medya", "desc": "Video kodekleri + MPC-HC" },
-    { "id": "HandBrake.HandBrake",                 "name": "HandBrake",            "cat": "Medya", "desc": "Video dönüştürücü" },
-    { "id": "Audacity.Audacity",                   "name": "Audacity",             "cat": "Medya", "desc": "Ses düzenleyici" },
-    { "id": "GIMP.GIMP.3",                         "name": "GIMP",                 "cat": "Medya", "desc": "Ücretsiz Photoshop alternatifi" },
-    { "id": "KDE.Krita",                           "name": "Krita",                "cat": "Medya", "desc": "Dijital çizim" },
-    { "id": "BlenderFoundation.Blender",           "name": "Blender",              "cat": "Medya", "desc": "3B modelleme ve animasyon" },
-    { "id": "ShareX.ShareX",                       "name": "ShareX",               "cat": "Medya", "desc": "Gelişmiş ekran görüntüsü / GIF" },
-
-    { "id": "7zip.7zip",                           "name": "7-Zip",                "cat": "Araçlar", "desc": "Açık kaynak arşivleyici" },
-    { "id": "RARLab.WinRAR",                       "name": "WinRAR",               "cat": "Araçlar", "desc": "RAR arşivleyici" },
-    { "id": "voidtools.Everything",                "name": "Everything",           "cat": "Araçlar", "desc": "Anında dosya arama" },
-    { "id": "Microsoft.PowerToys",                 "name": "PowerToys",            "cat": "Araçlar", "desc": "Microsoft'un güç kullanıcı araçları" },
-    { "id": "Notepad++.Notepad++",                 "name": "Notepad++",            "cat": "Araçlar", "desc": "Gelişmiş metin editörü" },
-    { "id": "qBittorrent.qBittorrent",             "name": "qBittorrent",          "cat": "Araçlar", "desc": "Reklamsız torrent istemcisi" },
-    { "id": "AnyDesk.AnyDesk",                     "name": "AnyDesk",              "cat": "Araçlar", "desc": "Uzaktan bağlantı" },
-    { "id": "TeamViewer.TeamViewer",               "name": "TeamViewer",           "cat": "Araçlar", "desc": "Uzaktan bağlantı" },
-    { "id": "Rufus.Rufus",                         "name": "Rufus",                "cat": "Araçlar", "desc": "Önyüklenebilir USB hazırla" },
-    { "id": "Ventoy.Ventoy",                       "name": "Ventoy",               "cat": "Araçlar", "desc": "Tek USB'de birden çok ISO" },
-    { "id": "Microsoft.WindowsTerminal",           "name": "Windows Terminal",     "cat": "Araçlar", "desc": "Modern terminal" },
-    { "id": "AntibodySoftware.WizTree",            "name": "WizTree",              "cat": "Araçlar", "desc": "Diskte ne yer kaplıyor, saniyede gösterir" },
-
-    { "id": "CPUID.CPU-Z",                         "name": "CPU-Z",                "cat": "Sistem & Donanım", "desc": "İşlemci / RAM / anakart bilgisi" },
-    { "id": "TechPowerUp.GPU-Z",                   "name": "GPU-Z",                "cat": "Sistem & Donanım", "desc": "Ekran kartı bilgisi" },
-    { "id": "REALiX.HWiNFO",                       "name": "HWiNFO",               "cat": "Sistem & Donanım", "desc": "Sıcaklık ve sensör takibi" },
-    { "id": "CrystalDewWorld.CrystalDiskInfo",     "name": "CrystalDiskInfo",      "cat": "Sistem & Donanım", "desc": "Disk sağlığı" },
-    { "id": "CrystalDewWorld.CrystalDiskMark",     "name": "CrystalDiskMark",      "cat": "Sistem & Donanım", "desc": "Disk hız testi" },
-    { "id": "Wagnardsoft.DisplayDriverUninstaller","name": "DDU",                  "cat": "Sistem & Donanım", "desc": "Ekran kartı sürücüsünü temiz kaldır" },
-
-    { "id": "Malwarebytes.Malwarebytes",           "name": "Malwarebytes",         "cat": "Güvenlik", "desc": "İkinci görüş virüs taraması" },
-    { "id": "Bitwarden.Bitwarden",                 "name": "Bitwarden",            "cat": "Güvenlik", "desc": "Açık kaynak şifre yöneticisi" },
-    { "id": "KeePassXCTeam.KeePassXC",             "name": "KeePassXC",            "cat": "Güvenlik", "desc": "Çevrimdışı şifre yöneticisi" },
-    { "id": "Proton.ProtonVPN",                    "name": "Proton VPN",           "cat": "Güvenlik", "desc": "Ücretsiz planı olan VPN" },
-    { "id": "Cloudflare.Warp",                     "name": "Cloudflare WARP",      "cat": "Güvenlik", "desc": "1.1.1.1 ücretsiz VPN/DNS" },
-
-    { "id": "TheDocumentFoundation.LibreOffice",   "name": "LibreOffice",          "cat": "Ofis & Not", "desc": "Ücretsiz Office alternatifi" },
-    { "id": "ONLYOFFICE.DesktopEditors",           "name": "ONLYOFFICE",           "cat": "Ofis & Not", "desc": "Office'e en yakın görünüm" },
-    { "id": "Notion.Notion",                       "name": "Notion",               "cat": "Ofis & Not", "desc": "Not ve proje yönetimi" },
-    { "id": "Obsidian.Obsidian",                   "name": "Obsidian",             "cat": "Ofis & Not", "desc": "Markdown not defteri" },
-    { "id": "SumatraPDF.SumatraPDF",               "name": "SumatraPDF",           "cat": "Ofis & Not", "desc": "Çok hafif PDF okuyucu" },
-    { "id": "Adobe.Acrobat.Reader.64-bit",         "name": "Adobe Acrobat Reader", "cat": "Ofis & Not", "desc": "PDF okuyucu" },
-
-    { "id": "Microsoft.VisualStudioCode",          "name": "VS Code",              "cat": "Geliştirme", "desc": "Kod editörü" },
-    { "id": "Git.Git",                             "name": "Git",                  "cat": "Geliştirme", "desc": "Sürüm kontrolü" },
-    { "id": "GitHub.GitHubDesktop",                "name": "GitHub Desktop",       "cat": "Geliştirme", "desc": "Git için arayüz" },
-    { "id": "OpenJS.NodeJS.LTS",                   "name": "Node.js LTS",          "cat": "Geliştirme", "desc": "JavaScript çalışma ortamı" },
-    { "id": "Python.Python.3.13",                  "name": "Python 3.13",          "cat": "Geliştirme", "desc": "Python" },
-    { "id": "Microsoft.PowerShell",                "name": "PowerShell 7",         "cat": "Geliştirme", "desc": "Modern PowerShell" },
-    { "id": "Docker.DockerDesktop",                "name": "Docker Desktop",       "cat": "Geliştirme", "desc": "Konteynerler" },
-    { "id": "Postman.Postman",                     "name": "Postman",              "cat": "Geliştirme", "desc": "API testi" },
-    { "id": "EclipseAdoptium.Temurin.21.JDK",      "name": "Java 21 (Temurin)",    "cat": "Geliştirme", "desc": "Minecraft ve Java geliştirme" },
-
-    { "id": "Microsoft.VCRedist.2015+.x64",        "name": "Visual C++ 2015-2022 (x64)", "cat": "Çalışma Ortamları", "desc": "'VCRUNTIME140.dll bulunamadı' hatası için" },
-    { "id": "Microsoft.VCRedist.2015+.x86",        "name": "Visual C++ 2015-2022 (x86)", "cat": "Çalışma Ortamları", "desc": "32 bit oyunlar için" },
-    { "id": "Microsoft.DirectX",                   "name": "DirectX Runtime",      "cat": "Çalışma Ortamları", "desc": "'d3dx9_43.dll eksik' hatası için" },
-    { "id": "Microsoft.DotNet.DesktopRuntime.8",   "name": ".NET Desktop Runtime 8", "cat": "Çalışma Ortamları", "desc": ".NET uygulamaları için" },
-    { "id": "Microsoft.XNARedist",                 "name": "XNA Framework",        "cat": "Çalışma Ortamları", "desc": "Terraria gibi eski oyunlar için" }
+    {
+      "id": "Google.Chrome",
+      "name": "Google Chrome",
+      "cat": "Tarayıcı",
+      "desc": "En yaygın tarayıcı"
+    },
+    {
+      "id": "Mozilla.Firefox",
+      "name": "Firefox",
+      "cat": "Tarayıcı",
+      "desc": "Açık kaynak, gizlilik odaklı"
+    },
+    {
+      "id": "Brave.Brave",
+      "name": "Brave",
+      "cat": "Tarayıcı",
+      "desc": "Dahili reklam engelleyici"
+    },
+    {
+      "id": "Opera.OperaGX",
+      "name": "Opera GX",
+      "cat": "Tarayıcı",
+      "desc": "Oyuncular için RAM/CPU sınırlayıcılı"
+    },
+    {
+      "id": "Vivaldi.Vivaldi",
+      "name": "Vivaldi",
+      "cat": "Tarayıcı",
+      "desc": "Çok özelleştirilebilir"
+    },
+    {
+      "id": "LibreWolf.LibreWolf",
+      "name": "LibreWolf",
+      "cat": "Tarayıcı",
+      "desc": "Telemetrisi sökülmüş Firefox"
+    },
+    {
+      "id": "Zen-Team.Zen-Browser",
+      "name": "Zen Browser",
+      "cat": "Tarayıcı",
+      "desc": "Dikey sekmeli, modern Firefox tabanı",
+      "match": "^Zen Browser"
+    },
+    {
+      "id": "Discord.Discord",
+      "name": "Discord",
+      "cat": "İletişim",
+      "desc": "Sesli sohbet ve topluluklar"
+    },
+    {
+      "id": "Telegram.TelegramDesktop",
+      "name": "Telegram",
+      "cat": "İletişim",
+      "desc": "Hızlı mesajlaşma"
+    },
+    {
+      "id": "9NKSQGP7F2NH",
+      "name": "WhatsApp",
+      "cat": "İletişim",
+      "desc": "Microsoft Store sürümü",
+      "source": "msstore",
+      "appx": "WhatsAppDesktop",
+      "match": "^WhatsApp"
+    },
+    {
+      "id": "Zoom.Zoom",
+      "name": "Zoom",
+      "cat": "İletişim",
+      "desc": "Görüntülü toplantı"
+    },
+    {
+      "id": "Microsoft.Teams",
+      "name": "Microsoft Teams",
+      "cat": "İletişim",
+      "desc": "Okul ve iş toplantıları",
+      "match": "^Microsoft Teams"
+    },
+    {
+      "id": "TeamSpeakSystems.TeamSpeakClient",
+      "name": "TeamSpeak",
+      "cat": "İletişim",
+      "desc": "Düşük gecikmeli oyun sesli sohbeti"
+    },
+    {
+      "id": "Valve.Steam",
+      "name": "Steam",
+      "cat": "Oyun",
+      "desc": "PC oyun mağazası"
+    },
+    {
+      "id": "EpicGames.EpicGamesLauncher",
+      "name": "Epic Games",
+      "cat": "Oyun",
+      "desc": "Haftalık bedava oyunlar"
+    },
+    {
+      "id": "ElectronicArts.EADesktop",
+      "name": "EA App",
+      "cat": "Oyun",
+      "desc": "EA oyunları (FC, Battlefield)",
+      "match": "^EA app"
+    },
+    {
+      "id": "Ubisoft.Connect",
+      "name": "Ubisoft Connect",
+      "cat": "Oyun",
+      "desc": "Ubisoft oyunları"
+    },
+    {
+      "id": "Blizzard.BattleNet",
+      "name": "Battle.net",
+      "cat": "Oyun",
+      "desc": "Blizzard ve Call of Duty"
+    },
+    {
+      "id": "GOG.Galaxy",
+      "name": "GOG Galaxy",
+      "cat": "Oyun",
+      "desc": "DRM'siz oyunlar"
+    },
+    {
+      "id": "Playnite.Playnite",
+      "name": "Playnite",
+      "cat": "Oyun",
+      "desc": "Tüm kütüphaneler tek yerde"
+    },
+    {
+      "id": "Guru3D.Afterburner",
+      "name": "MSI Afterburner",
+      "cat": "Oyun",
+      "desc": "FPS göstergesi ve GPU ayarı",
+      "match": "MSI Afterburner"
+    },
+    {
+      "id": "VideoLAN.VLC",
+      "name": "VLC",
+      "cat": "Medya",
+      "desc": "Her formatı oynatır"
+    },
+    {
+      "id": "9NCBCSZSJRSB",
+      "name": "Spotify",
+      "cat": "Medya",
+      "desc": "Microsoft Store sürümü",
+      "source": "msstore",
+      "appx": "SpotifyMusic",
+      "match": "^Spotify"
+    },
+    {
+      "id": "OBSProject.OBSStudio",
+      "name": "OBS Studio",
+      "cat": "Medya",
+      "desc": "Yayın ve ekran kaydı"
+    },
+    {
+      "id": "CodecGuide.K-LiteCodecPack.Standard",
+      "name": "K-Lite Codec Pack",
+      "cat": "Medya",
+      "desc": "Video kodekleri + MPC-HC",
+      "match": "^K-Lite"
+    },
+    {
+      "id": "HandBrake.HandBrake",
+      "name": "HandBrake",
+      "cat": "Medya",
+      "desc": "Video dönüştürücü"
+    },
+    {
+      "id": "Audacity.Audacity",
+      "name": "Audacity",
+      "cat": "Medya",
+      "desc": "Ses düzenleyici"
+    },
+    {
+      "id": "GIMP.GIMP.3",
+      "name": "GIMP",
+      "cat": "Medya",
+      "desc": "Ücretsiz Photoshop alternatifi",
+      "match": "^GIMP"
+    },
+    {
+      "id": "KDE.Krita",
+      "name": "Krita",
+      "cat": "Medya",
+      "desc": "Dijital çizim"
+    },
+    {
+      "id": "BlenderFoundation.Blender",
+      "name": "Blender",
+      "cat": "Medya",
+      "desc": "3B modelleme ve animasyon"
+    },
+    {
+      "id": "ShareX.ShareX",
+      "name": "ShareX",
+      "cat": "Medya",
+      "desc": "Gelişmiş ekran görüntüsü / GIF"
+    },
+    {
+      "id": "7zip.7zip",
+      "name": "7-Zip",
+      "cat": "Araçlar",
+      "desc": "Açık kaynak arşivleyici"
+    },
+    {
+      "id": "RARLab.WinRAR",
+      "name": "WinRAR",
+      "cat": "Araçlar",
+      "desc": "RAR arşivleyici"
+    },
+    {
+      "id": "voidtools.Everything",
+      "name": "Everything",
+      "cat": "Araçlar",
+      "desc": "Anında dosya arama"
+    },
+    {
+      "id": "Microsoft.PowerToys",
+      "name": "PowerToys",
+      "cat": "Araçlar",
+      "desc": "Microsoft'un güç kullanıcı araçları",
+      "match": "^PowerToys"
+    },
+    {
+      "id": "Notepad++.Notepad++",
+      "name": "Notepad++",
+      "cat": "Araçlar",
+      "desc": "Gelişmiş metin editörü"
+    },
+    {
+      "id": "qBittorrent.qBittorrent",
+      "name": "qBittorrent",
+      "cat": "Araçlar",
+      "desc": "Reklamsız torrent istemcisi"
+    },
+    {
+      "id": "AnyDesk.AnyDesk",
+      "name": "AnyDesk",
+      "cat": "Araçlar",
+      "desc": "Uzaktan bağlantı"
+    },
+    {
+      "id": "TeamViewer.TeamViewer",
+      "name": "TeamViewer",
+      "cat": "Araçlar",
+      "desc": "Uzaktan bağlantı"
+    },
+    {
+      "id": "Rufus.Rufus",
+      "name": "Rufus",
+      "cat": "Araçlar",
+      "desc": "Önyüklenebilir USB hazırla"
+    },
+    {
+      "id": "Ventoy.Ventoy",
+      "name": "Ventoy",
+      "cat": "Araçlar",
+      "desc": "Tek USB'de birden çok ISO"
+    },
+    {
+      "id": "Microsoft.WindowsTerminal",
+      "name": "Windows Terminal",
+      "cat": "Araçlar",
+      "desc": "Modern terminal",
+      "appx": "Microsoft.WindowsTerminal",
+      "match": "^Windows Terminal"
+    },
+    {
+      "id": "AntibodySoftware.WizTree",
+      "name": "WizTree",
+      "cat": "Araçlar",
+      "desc": "Diskte ne yer kaplıyor, saniyede gösterir"
+    },
+    {
+      "id": "CPUID.CPU-Z",
+      "name": "CPU-Z",
+      "cat": "Sistem & Donanım",
+      "desc": "İşlemci / RAM / anakart bilgisi"
+    },
+    {
+      "id": "TechPowerUp.GPU-Z",
+      "name": "GPU-Z",
+      "cat": "Sistem & Donanım",
+      "desc": "Ekran kartı bilgisi"
+    },
+    {
+      "id": "REALiX.HWiNFO",
+      "name": "HWiNFO",
+      "cat": "Sistem & Donanım",
+      "desc": "Sıcaklık ve sensör takibi"
+    },
+    {
+      "id": "CrystalDewWorld.CrystalDiskInfo",
+      "name": "CrystalDiskInfo",
+      "cat": "Sistem & Donanım",
+      "desc": "Disk sağlığı"
+    },
+    {
+      "id": "CrystalDewWorld.CrystalDiskMark",
+      "name": "CrystalDiskMark",
+      "cat": "Sistem & Donanım",
+      "desc": "Disk hız testi"
+    },
+    {
+      "id": "Wagnardsoft.DisplayDriverUninstaller",
+      "name": "DDU",
+      "cat": "Sistem & Donanım",
+      "desc": "Ekran kartı sürücüsünü temiz kaldır",
+      "match": "Display Driver Uninstaller"
+    },
+    {
+      "id": "Malwarebytes.Malwarebytes",
+      "name": "Malwarebytes",
+      "cat": "Güvenlik",
+      "desc": "İkinci görüş virüs taraması"
+    },
+    {
+      "id": "Bitwarden.Bitwarden",
+      "name": "Bitwarden",
+      "cat": "Güvenlik",
+      "desc": "Açık kaynak şifre yöneticisi"
+    },
+    {
+      "id": "KeePassXCTeam.KeePassXC",
+      "name": "KeePassXC",
+      "cat": "Güvenlik",
+      "desc": "Çevrimdışı şifre yöneticisi"
+    },
+    {
+      "id": "Proton.ProtonVPN",
+      "name": "Proton VPN",
+      "cat": "Güvenlik",
+      "desc": "Ücretsiz planı olan VPN"
+    },
+    {
+      "id": "Cloudflare.Warp",
+      "name": "Cloudflare WARP",
+      "cat": "Güvenlik",
+      "desc": "1.1.1.1 ücretsiz VPN/DNS"
+    },
+    {
+      "id": "TheDocumentFoundation.LibreOffice",
+      "name": "LibreOffice",
+      "cat": "Ofis & Not",
+      "desc": "Ücretsiz Office alternatifi"
+    },
+    {
+      "id": "ONLYOFFICE.DesktopEditors",
+      "name": "ONLYOFFICE",
+      "cat": "Ofis & Not",
+      "desc": "Office'e en yakın görünüm"
+    },
+    {
+      "id": "Notion.Notion",
+      "name": "Notion",
+      "cat": "Ofis & Not",
+      "desc": "Not ve proje yönetimi"
+    },
+    {
+      "id": "Obsidian.Obsidian",
+      "name": "Obsidian",
+      "cat": "Ofis & Not",
+      "desc": "Markdown not defteri"
+    },
+    {
+      "id": "SumatraPDF.SumatraPDF",
+      "name": "SumatraPDF",
+      "cat": "Ofis & Not",
+      "desc": "Çok hafif PDF okuyucu"
+    },
+    {
+      "id": "Adobe.Acrobat.Reader.64-bit",
+      "name": "Adobe Acrobat Reader",
+      "cat": "Ofis & Not",
+      "desc": "PDF okuyucu",
+      "match": "^Adobe Acrobat"
+    },
+    {
+      "id": "Microsoft.VisualStudioCode",
+      "name": "VS Code",
+      "cat": "Geliştirme",
+      "desc": "Kod editörü",
+      "match": "Microsoft Visual Studio Code"
+    },
+    {
+      "id": "Git.Git",
+      "name": "Git",
+      "cat": "Geliştirme",
+      "desc": "Sürüm kontrolü"
+    },
+    {
+      "id": "GitHub.GitHubDesktop",
+      "name": "GitHub Desktop",
+      "cat": "Geliştirme",
+      "desc": "Git için arayüz"
+    },
+    {
+      "id": "OpenJS.NodeJS.LTS",
+      "name": "Node.js LTS",
+      "cat": "Geliştirme",
+      "desc": "JavaScript çalışma ortamı",
+      "match": "^Node\\.js"
+    },
+    {
+      "id": "Python.Python.3.13",
+      "name": "Python 3.13",
+      "cat": "Geliştirme",
+      "desc": "Python",
+      "match": "^Python 3\\.13"
+    },
+    {
+      "id": "Microsoft.PowerShell",
+      "name": "PowerShell 7",
+      "cat": "Geliştirme",
+      "desc": "Modern PowerShell",
+      "match": "^PowerShell 7"
+    },
+    {
+      "id": "Docker.DockerDesktop",
+      "name": "Docker Desktop",
+      "cat": "Geliştirme",
+      "desc": "Konteynerler"
+    },
+    {
+      "id": "Postman.Postman",
+      "name": "Postman",
+      "cat": "Geliştirme",
+      "desc": "API testi"
+    },
+    {
+      "id": "EclipseAdoptium.Temurin.21.JDK",
+      "name": "Java 21 (Temurin)",
+      "cat": "Geliştirme",
+      "desc": "Minecraft ve Java geliştirme",
+      "match": "Temurin.*\\b21"
+    },
+    {
+      "id": "Microsoft.VCRedist.2015+.x64",
+      "name": "Visual C++ 2015-2022 (x64)",
+      "cat": "Çalışma Ortamları",
+      "desc": "'VCRUNTIME140.dll bulunamadı' hatası için",
+      "match": "Visual C\\+\\+ 2015-20\\d\\d Redistributable \\(x64\\)"
+    },
+    {
+      "id": "Microsoft.VCRedist.2015+.x86",
+      "name": "Visual C++ 2015-2022 (x86)",
+      "cat": "Çalışma Ortamları",
+      "desc": "32 bit oyunlar için",
+      "match": "Visual C\\+\\+ 2015-20\\d\\d Redistributable \\(x86\\)"
+    },
+    {
+      "id": "Microsoft.DirectX",
+      "name": "DirectX Runtime",
+      "cat": "Çalışma Ortamları",
+      "desc": "'d3dx9_43.dll eksik' hatası için",
+      "match": "^DirectX"
+    },
+    {
+      "id": "Microsoft.DotNet.DesktopRuntime.8",
+      "name": ".NET Desktop Runtime 8",
+      "cat": "Çalışma Ortamları",
+      "desc": ".NET uygulamaları için",
+      "match": "Windows Desktop Runtime - 8\\."
+    },
+    {
+      "id": "Microsoft.XNARedist",
+      "name": "XNA Framework",
+      "cat": "Çalışma Ortamları",
+      "desc": "Terraria gibi eski oyunlar için",
+      "match": "XNA Framework"
+    }
   ]
 }
